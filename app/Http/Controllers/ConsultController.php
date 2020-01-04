@@ -31,8 +31,8 @@ class ConsultController extends AppBaseController
     public function index(Request $request)
     {
         $consults = $this->consultRepository->all();
-
-        return view('consults.index')
+        $patients = Patient::all();
+        return view('consults.index', compact('patients'))
             ->with('consults', $consults);
     }
 
@@ -44,7 +44,7 @@ class ConsultController extends AppBaseController
        */
     public function create()
     {
-        // $patients = Patient::all();
+         //$patients = Patient::all();
         // $consult = Consult::all();
         return view('consults.create');
     }
@@ -59,9 +59,7 @@ class ConsultController extends AppBaseController
     public function store(CreateConsultRequest $request)
     {
         $input = $request->all();
-
         $consult = $this->consultRepository->create($input);
-
         Flash::success('Consult saved successfully.');
 
         return redirect(route('consults.index'));

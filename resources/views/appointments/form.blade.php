@@ -33,7 +33,7 @@
 
 <!-- Ap Specialist Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('ap_specialist', 'Preferred Specialist:') !!}
+    {!! Form::label('ap_specialist', 'Preferred Specialization:') !!}
     {!! Form::text('ap_specialist', null, ['class' => 'form-control']) !!}
 </div>
 

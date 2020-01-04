@@ -22,7 +22,7 @@ class Consult extends Model
     use SoftDeletes;
 
     public $table = 'consults';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -33,6 +33,7 @@ class Consult extends Model
 
     public $fillable = [
         'con_dateSxStart',
+        'patients_id',
         'con_height',
         'con_weight',
         'con_bp',
@@ -66,5 +67,8 @@ class Consult extends Model
         'con_diagnosis' => 'required'
     ];
 
-    
+    public function patient(){
+      return $this->hasMany(App\Patient::class);
+    }
+
 }

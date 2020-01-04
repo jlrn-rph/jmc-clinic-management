@@ -7,7 +7,7 @@
 <!-- Dr Regdate Field -->
 <div class="form-group col-sm-4">
     {!! Form::label('dr_regDate', 'Date of Registration:') !!}
-    {!! Form::date('dr_regDate', null, ['class' => 'form-control','id'=>'dr_regDate']) !!}
+    {!! Form::date('dr_regDate', null, ['class' => 'form-control','id'=>'dr_regDate', 'required']) !!}
 </div>
 
 @section('scripts')
@@ -28,31 +28,31 @@
 <!-- Dr Specialist Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('dr_specialist', 'Specialization:') !!}
-    {!! Form::text('dr_specialist', null, ['class' => 'form-control']) !!}
+    {!! Form::text('dr_specialist', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Dr License Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('dr_license', 'License Number:') !!}
-    {!! Form::text('dr_license', null, ['class' => 'form-control']) !!}
+    {!! Form::text('dr_license', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Dr Name Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_name', 'Name:') !!}
-    {!! Form::text('dr_name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('dr_name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Dr Gender Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_gender', 'Gender:') !!}
-    {!! Form::text('dr_gender', null, ['class' => 'form-control']) !!}
+    {!! Form::text('dr_gender', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Dr Dob Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_dob', 'Date of Birth:') !!}
-    {!! Form::date('dr_dob', null, ['class' => 'form-control','id'=>'dr_dob']) !!}
+    {!! Form::date('dr_dob', null, ['class' => 'form-control','id'=>'dr_dob', 'required']) !!}
 </div>
 
 @section('scripts')
@@ -67,47 +67,47 @@
 <!-- Dr Address Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('dr_address', 'Address:') !!}
-    {!! Form::textarea('dr_address', null, ['class' => 'form-control', 'cols'=>40, 'rows'=>2]) !!}
+    {!! Form::textarea('dr_address', null, ['class' => 'form-control', 'cols'=>40, 'rows'=>2, 'required']) !!}
 </div>
 
 <!-- Dr Contact Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('dr_contact', 'Contact Number:') !!}
-    {!! Form::text('dr_contact', null, ['class' => 'form-control']) !!}
+    {!! Form::text('dr_contact', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Dr Email Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('dr_email', 'Email:') !!}
-    {!! Form::text('dr_email', null, ['class' => 'form-control']) !!}
+    {!! Form::text('dr_email', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Dr Fee Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_fee', 'Professional Fee:') !!}
-    {!! Form::text('dr_fee', null, ['class' => 'form-control']) !!}
+    {!! Form::text('dr_fee', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Dr Timein Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('dr_timeIn', 'Time In:') !!}
-    {!! Form::text('dr_timeIn', null, ['class' => 'form-control']) !!}
+    {!! Form::time('dr_timeIn', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Dr Timeout Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('dr_timeOut', 'Time Out:') !!}
-    {!! Form::text('dr_timeOut', null, ['class' => 'form-control']) !!}
+    {!! Form::time('dr_timeOut', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Dr Daysavail Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_daysAvail', 'Available Days:') !!}
-    {!! Form::text('dr_daysAvail', null, ['class' => 'form-control']) !!}
+    {!! Form::text('dr_daysAvail', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Dr Status Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_status', 'Status:') !!}
-    {!! Form::number('dr_status', null, ['class' => 'form-control']) !!}
+    {!! Form::number('dr_status', null, ['class' => 'form-control', 'required']) !!}
 </div>

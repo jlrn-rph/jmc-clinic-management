@@ -13,7 +13,11 @@
                 <div class="row">
                     {!! Form::open(['route' => 'payments.store']) !!}
 
-                        @include('payments.fields')
+                    @include('payments.form')
+                    <div class="col-sm-12">
+                      <a class="btn btn-close" href="{{ route('payments.index') }}">Cancel</a>
+                      {!! Form::submit('Add Payment', ['class' => 'btn btn-info']) !!}
+                    </div>
 
                     {!! Form::close() !!}
                 </div>

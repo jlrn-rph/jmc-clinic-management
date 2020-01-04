@@ -11,8 +11,9 @@
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
                     @include('patients.show_fields')
-                    @include('consults.form')
-                    @include('prescriptions.form')
+
+                    
+
                     <a href="{{ route('patients.index') }}" class="btn btn-default">Back</a>
                 </div>
             </div>

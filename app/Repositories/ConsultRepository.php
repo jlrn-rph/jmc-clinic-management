@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Consult;
+use App\Models\Patient;
 use App\Repositories\BaseRepository;
 
 /**
@@ -18,11 +19,12 @@ class ConsultRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'con_dateSxStart',
+        'patients_id',
         'con_height',
         'con_weight',
         'con_bp',
         'con_symptom',
-        'con_diagnosis'
+        'con_diagnosis',
     ];
 
     /**

@@ -8,7 +8,7 @@ class Patient extends Model
 {
     protected $guarded = [];
 
-    // public function consult(){
-    //   return $this->hasOne(App\Consult);
-    // }
+    public function consult(){
+      return $this->belongsTo(App\Consult::class);
+    }
 }

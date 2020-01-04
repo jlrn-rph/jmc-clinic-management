@@ -55,7 +55,7 @@
 <!-- Px Gender Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('px_gender', 'Sex:') !!}
-    {!! Form::select('px_gender', ['Male' => 'Male', 'Female' => 'Female'], ['class' => 'form-control'], ['placeholder' => 'Select Sex']) !!}
+    {!! Form::select('px_gender', ['Male' => 'Male', 'Female' => 'Female'], ['class' => 'form-control', 'required'], ['placeholder' => 'Select Sex']) !!}
 </div>
 
 <!-- Px Contact Field -->

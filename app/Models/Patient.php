@@ -88,5 +88,8 @@ class Patient extends Model
         'px_status' => 'required'
     ];
 
+    public function consult(){
+      return $this->belongsTo(App\Consult::class);
+    }
 
 }

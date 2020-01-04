@@ -27,7 +27,7 @@
     @yield('css')
 </head>
 
-<body class="skin-blue sidebar-mini">
+<body class="skin-green-light sidebar-mini">
 @if (!Auth::guest())
     <div class="wrapper">
         <!-- Main Header -->
@@ -96,10 +96,10 @@
             @yield('content')
         </div>
 
-        <!-- Main Footer -->
+        <!-- Main Footer
         <footer class="main-footer" style="max-height: 100px;text-align: center">
-            <strong>Copyright © 2016 <a href="#">Company</a>.</strong> All rights reserved.
-        </footer>
+            <strong>Copyright © 2019 <a href="#">Company</a>.</strong> All rights reserved.
+        </footer>-->
 
     </div>
 @else
@@ -118,7 +118,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    InfyOm Generator
+                    Clinic Management System
                 </a>
             </div>
 

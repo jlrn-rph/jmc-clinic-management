@@ -15,7 +15,7 @@ class CreateConsultsTable extends Migration
     {
         Schema::create('consults', function (Blueprint $table) {
           $table->bigIncrements('id');
-          $table->unsignedBigInteger('patients_id')->index();
+          $table->string('patients_id');
           $table->date('con_dateSxStart');
           $table->string('con_height')->nullable();
           $table->string('con_weight')->nullable();
@@ -24,7 +24,6 @@ class CreateConsultsTable extends Migration
           $table->longText('con_diagnosis');
           $table->softDeletes();
           $table->timestamps();
-          $table->foreign('patients_id')->references('id')->on('patients');
         });
     }
 

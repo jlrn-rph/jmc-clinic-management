@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1 class="pull-left">Patients</h1>
         <h1 class="pull-right">
-           <a data-toggle="modal" data-target="#add-new-patient" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px"><i class="fa fa-plus-circle"></i> Add Patient</a>
+           <a data-toggle="modal" data-target="#add-new-patient" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px"><i class="fa fa-plus-circle"></i> New Patient</a>
         </h1>
     </section>
     <div class="content">
