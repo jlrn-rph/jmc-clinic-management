@@ -24,7 +24,7 @@ class CreatePatientsTable extends Migration
           $table->string('px_gender');
           $table->string('px_contact');
           $table->string('px_email')->unique();
-          $table->string('px_doctor');
+          $table->unsignedBigInteger('doctor_id');
           $table->integer('px_status')->default(1);
           $table->softDeletes();
           $table->timestamps();

@@ -1,4 +1,5 @@
 <!-- Con Datesxstart Field -->
+
 <div class="form-group col-sm-12">
     {!! Form::label('con_dateSxStart', 'Date:') !!}
     {!! Form::date('con_dateSxStart', null, ['class' => 'form-control','id'=>'con_dateSxStart', 'required']) !!}
@@ -15,12 +16,13 @@
 
 <div class="form-group col-sm-12">
   <label for="patients_id">Patient Name: </label>
-  <select name="patients_id" id="patients_id">
+  <select name="patients_id" id="patients_id" class="selectpicker" data-live-search="true">
+      <option value=""> Select Patient</option>
     @foreach($patients as $patient)
       <option value="{{$patient->id}}"> {{$patient->px_name}}</option>
     @endforeach
   </select>
-</div>
+</div> 
 
 <!-- Con Height Field -->
 <div class="form-group col-sm-12">

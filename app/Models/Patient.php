@@ -46,7 +46,7 @@ class Patient extends Model
         'px_gender',
         'px_contact',
         'px_email',
-        'px_doctor',
+        'doctor_id',
         'px_status'
     ];
 
@@ -66,7 +66,7 @@ class Patient extends Model
         'px_gender' => 'string',
         'px_contact' => 'string',
         'px_email' => 'string',
-        'px_doctor' => 'string',
+        'doctor_id' => 'string',
         'px_status' => 'integer'
     ];
 
@@ -84,7 +84,7 @@ class Patient extends Model
         'px_gender' => 'required',
         'px_contact' => 'required',
         'px_email' => 'required',
-        'px_doctor' => 'required',
+        'doctor_id' => 'required',
         'px_status' => 'required'
     ];
 
@@ -92,4 +92,8 @@ class Patient extends Model
       return $this->belongsTo(App\Consult::class);
     }
 
+    public function doctors(){
+      return $this->BelongsToMany(App\Doctor::class);
+    }
+    
 }

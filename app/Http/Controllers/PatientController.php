@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePatientRequest;
 use App\Repositories\PatientRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use App\Doctor;
 use Flash;
 use Response;
 
@@ -29,9 +30,9 @@ class PatientController extends AppBaseController
      */
     public function index(Request $request)
     {
+         $doctors = Doctor::all();
         $patients = $this->patientRepository->all();
-
-        return view('patients.index')
+        return view('patients.index', compact('doctors'))
             ->with('patients', $patients);
     }
 
@@ -42,7 +43,8 @@ class PatientController extends AppBaseController
      */
     public function create()
     {
-        return view('patients.create');
+         $doctors = Doctor::all();
+        return view('patients.create', compact('doctors'));
     }
 
     /**

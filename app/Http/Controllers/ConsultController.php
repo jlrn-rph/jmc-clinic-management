@@ -54,7 +54,8 @@ class ConsultController extends AppBaseController
      *
      * @param CreateConsultRequest $request
      *
-     * @return Response
+     *
+      @return Response
      */
     public function store(CreateConsultRequest $request)
     {

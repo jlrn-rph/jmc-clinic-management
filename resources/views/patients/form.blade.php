@@ -72,8 +72,13 @@
 
 <!-- Px Doctor Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('px_doctor', 'Doctor-in-Charge:') !!}
-    {!! Form::text('px_doctor', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::label('doctor_id', 'Doctor-in-Charge:') !!}
+  <select name="doctor_id" id="doctor_id" class="selectpicker" data-live-search="true">
+        <option value=""> Select Doctor....</option>
+    @foreach($doctors as $doctor)
+        <option value="{{$doctor->id}}"> {{$doctor->dr_name}}</option>
+    @endforeach
+  </select>
 </div>
 
 <!-- Px Status Field -->
