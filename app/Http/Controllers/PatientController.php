@@ -30,7 +30,7 @@ class PatientController extends AppBaseController
      */
     public function index(Request $request)
     {
-         $doctors = Doctor::all();
+        $doctors = Doctor::all();
         $patients = $this->patientRepository->all();
         return view('patients.index', compact('doctors'))
             ->with('patients', $patients);
@@ -43,7 +43,7 @@ class PatientController extends AppBaseController
      */
     public function create()
     {
-         $doctors = Doctor::all();
+        $doctors = Doctor::all();
         return view('patients.create', compact('doctors'));
     }
 
@@ -57,7 +57,7 @@ class PatientController extends AppBaseController
     public function store(CreatePatientRequest $request)
     {
         $input = $request->all();
-
+        $doctors = Doctor::all();
         $patient = $this->patientRepository->create($input);
 
         Flash::success('Patient saved successfully.');
@@ -75,14 +75,14 @@ class PatientController extends AppBaseController
     public function show($id)
     {
         $patient = $this->patientRepository->find($id);
-
+        $doctors = Doctor::all();
         if (empty($patient)) {
             Flash::error('Patient not found');
 
             return redirect(route('patients.index'));
         }
 
-        return view('patients.show')->with('patient', $patient);
+        return view('patients.show', compact('doctors'))->with('patient', $patient);
     }
 
     /**
@@ -95,14 +95,14 @@ class PatientController extends AppBaseController
     public function edit($id)
     {
         $patient = $this->patientRepository->find($id);
-
+        $doctors = Doctor::all();
         if (empty($patient)) {
             Flash::error('Patient not found');
 
             return redirect(route('patients.index'));
         }
 
-        return view('patients.edit')->with('patient', $patient);
+        return view('patients.edit', compact('doctors'))->with('patient', $patient);
     }
 
     /**
