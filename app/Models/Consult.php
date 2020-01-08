@@ -67,8 +67,9 @@ class Consult extends Model
         'con_diagnosis' => 'required'
     ];
 
-    public function patient(){
-      return $this->hasMany(App\Patient::class);
+    public function patients(){
+        return $this->belongsTo(Patient::class);
     }
+    
 
 }
