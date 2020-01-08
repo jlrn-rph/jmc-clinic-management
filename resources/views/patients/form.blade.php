@@ -72,13 +72,12 @@
 
 <!-- Px Doctor Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('doctor_id', 'Doctor-in-Charge:') !!}
-  <select name="doctor_id" id="doctor_id" class="selectpicker" data-live-search="true">
-        <option value=""> Select Doctor....</option>
-    @foreach($doctors as $doctor)
-        <option value="{{$doctor->id}}"> {{$doctor->dr_name}}</option>
-    @endforeach
-  </select>
+    {!! Form::label('px_doctor', 'Doctor-in-Charge:') !!}
+      <select name="px_doctor" id="px_doctor" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Doctor" title="Select Doctor">
+        @foreach($doctors as $doctor)
+            <option value="{{$doctor->dr_name}}"> {{$doctor->dr_name}}</option>
+        @endforeach
+      </select>
 </div>
 
 <!-- Px Status Field -->
@@ -86,3 +85,5 @@
     {!! Form::label('px_status', 'Status:') !!}
     {!! Form::number('px_status', null, ['class' => 'form-control', 'required']) !!}
 </div>
+
+<!-- Select2 -->
