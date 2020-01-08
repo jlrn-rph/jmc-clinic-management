@@ -1,4 +1,12 @@
 <!-- Rx Generic Field -->
+<div class="form-group col-sm-12">
+  <label for="patients_id">Patient Name: </label>
+  <select name="patients_id" id="patients_id" class="form-control selectpicker" data-live-search="true" title="Select Patient">
+    @foreach($patients as $patient)
+      <option value="{{$patient->id}}"> {{$patient->px_name}}</option>
+    @endforeach
+  </select>
+</div>
 <div class="form-group col-sm-6">
     {!! Form::label('rx_generic', 'Generic Name:') !!}
     {!! Form::text('rx_generic', null, ['class' => 'form-control']) !!}
