@@ -13,7 +13,7 @@
 <!-- Pay Name Field -->
 <div class="form-group">
     {!! Form::label('pay_name', 'Patient Name:') !!}
-    <p>{{ $payment->pay_name }}</p>
+    <p>{{ $payment->patients->px_name }}</p>
 </div>
 
 <!-- Pay Address Field -->
