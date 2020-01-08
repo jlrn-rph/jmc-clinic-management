@@ -9,7 +9,8 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
-
+use App\Patient;
+use App\labTest;
 class LaboratoryController extends AppBaseController
 {
     /** @var  LaboratoryRepository */
@@ -30,8 +31,9 @@ class LaboratoryController extends AppBaseController
     public function index(Request $request)
     {
         $laboratories = $this->laboratoryRepository->all();
-
-        return view('laboratories.index')
+        $patients = Patient::all();
+        $labtests = LabTest::all();
+        return view('laboratories.index', compact('patients', 'labtests'))
             ->with('laboratories', $laboratories);
     }
 
@@ -42,7 +44,9 @@ class LaboratoryController extends AppBaseController
      */
     public function create()
     {
-        return view('laboratories.create');
+        $patients = Patient::all();
+        $labtests = LabTest::all();
+        return view('laboratories.create', compact('patients', 'labtests'));
     }
 
     /**
@@ -55,7 +59,8 @@ class LaboratoryController extends AppBaseController
     public function store(CreateLaboratoryRequest $request)
     {
         $input = $request->all();
-
+        $patients = Patient::all();
+        $labtests = LabTest::all();
         $laboratory = $this->laboratoryRepository->create($input);
 
         Flash::success('Laboratory saved successfully.');
@@ -73,14 +78,15 @@ class LaboratoryController extends AppBaseController
     public function show($id)
     {
         $laboratory = $this->laboratoryRepository->find($id);
-
+        $patients = Patient::all();
+        $labtests = LabTest::all();
         if (empty($laboratory)) {
             Flash::error('Laboratory not found');
 
             return redirect(route('laboratories.index'));
         }
 
-        return view('laboratories.show')->with('laboratory', $laboratory);
+        return view('laboratories.show', compact('patients', 'labtests'))->with('laboratory', $laboratory);
     }
 
     /**
@@ -93,14 +99,15 @@ class LaboratoryController extends AppBaseController
     public function edit($id)
     {
         $laboratory = $this->laboratoryRepository->find($id);
-
+        $patients = Patient::all();
+        $labtests = LabTest::all();
         if (empty($laboratory)) {
             Flash::error('Laboratory not found');
 
             return redirect(route('laboratories.index'));
         }
 
-        return view('laboratories.edit')->with('laboratory', $laboratory);
+        return view('laboratories.edit', compact('patients','labtests'))->with('laboratory', $laboratory);
     }
 
     /**
