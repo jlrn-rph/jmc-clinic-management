@@ -9,7 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
-
+use App\Doctor;
 class ScheduleController extends AppBaseController
 {
     /** @var  ScheduleRepository */
@@ -30,8 +30,8 @@ class ScheduleController extends AppBaseController
     public function index(Request $request)
     {
         $schedules = $this->scheduleRepository->all();
-
-        return view('schedules.index')
+        $doctors = Doctor::all();
+        return view('schedules.index', compact('doctors'))
             ->with('schedules', $schedules);
     }
 
@@ -42,7 +42,8 @@ class ScheduleController extends AppBaseController
      */
     public function create()
     {
-        return view('schedules.create');
+        $doctors = Doctor::all();
+        return view('schedules.create', compact('doctors'));
     }
 
     /**
@@ -73,14 +74,14 @@ class ScheduleController extends AppBaseController
     public function show($id)
     {
         $schedule = $this->scheduleRepository->find($id);
-
+        $doctors = Doctor::all();
         if (empty($schedule)) {
             Flash::error('Schedule not found');
 
             return redirect(route('schedules.index'));
         }
 
-        return view('schedules.show')->with('schedule', $schedule);
+        return view('schedules.show', compact('doctors'))->with('schedule', $schedule);
     }
 
     /**
@@ -93,14 +94,14 @@ class ScheduleController extends AppBaseController
     public function edit($id)
     {
         $schedule = $this->scheduleRepository->find($id);
-
+        $doctors = Doctor::all();
         if (empty($schedule)) {
             Flash::error('Schedule not found');
 
             return redirect(route('schedules.index'));
         }
 
-        return view('schedules.edit')->with('schedule', $schedule);
+        return view('schedules.edit', compact('doctors'))->with('schedule', $schedule);
     }
 
     /**
