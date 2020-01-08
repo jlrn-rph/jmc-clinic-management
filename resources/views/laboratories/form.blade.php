@@ -22,7 +22,11 @@
 <!-- Lab Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_name', 'Patient Name:') !!}
-    {!! Form::text('lab_name', null, ['class' => 'form-control', 'required']) !!}
+      <select name="lab_name" id="lab_name" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
+    @foreach($patients as $patient)
+      <option value="{{$patient->px_name}}"}}> {{$patient->px_name}}</option>
+    @endforeach
+  </select>
 </div>
 
 <!-- Lab Address Field -->
@@ -49,7 +53,7 @@
 <!-- Lab Gender Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_gender', 'Gender:') !!}
-    {!! Form::text('lab_gender', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::select('lab_gender', ['Male' => 'Male', 'Female' => 'Female'], ['class' => 'form-control', 'required'], ['placeholder' => 'Select Sex']) !!}
 </div>
 
 <!-- Lab Contact Field -->
@@ -73,7 +77,11 @@
 <!-- Lab Test Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_test', 'Test Ordered:') !!}
-    {!! Form::text('lab_test', null, ['class' => 'form-control', 'required']) !!}
+    <select name="lab_test" id="lab_test" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
+    @foreach($labtests as $labtest)
+      <option value="{{$labtest->lt_name}}"}}> {{$labtest->lt_name}}</option>
+    @endforeach
+  </select>
 </div>
 
 <!-- Lab Status Field -->
