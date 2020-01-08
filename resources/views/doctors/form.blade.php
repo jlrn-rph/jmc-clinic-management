@@ -28,8 +28,12 @@
 <!-- Dr Specialist Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('dr_specialist', 'Specialization:') !!}
-    {!! Form::text('dr_specialist', null, ['class' => 'form-control', 'required']) !!}
-</div>
+      <select name="dr_specialist" id="dr_specialist" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Specialization" title="Select Specialization">
+        @foreach($specialization as $specialize)
+          <option value="{{$specialize->id}}"}}> {{$specialize->sp_name}}</option>
+        @endforeach
+      </select>
+</div> 
 
 <!-- Dr License Field -->
 <div class="form-group col-sm-6">
