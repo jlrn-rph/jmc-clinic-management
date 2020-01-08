@@ -15,6 +15,7 @@ class CreatePrescriptionsTable extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
           $table->bigIncrements('id');
+          $table->string('px_name');
           $table->string('rx_generic')->nullable();
           $table->string('rx_brand')->nullable();
           $table->string('rx_freq')->nullable();
