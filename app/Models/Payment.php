@@ -39,7 +39,7 @@ class Payment extends Model
     public $fillable = [
         'pay_regNumber',
         'pay_regDate',
-        'pay_name',
+        'patients_id',
         'pay_address',
         'pay_admission',
         'pay_consultation',
@@ -59,7 +59,7 @@ class Payment extends Model
         'id' => 'integer',
         'pay_regNumber' => 'string',
         'pay_regDate' => 'date',
-        'pay_name' => 'string',
+        'patients_id' => 'string',
         'pay_address' => 'string',
         'pay_admission' => 'string',
         'pay_consultation' => 'string',
@@ -78,11 +78,13 @@ class Payment extends Model
     public static $rules = [
         'pay_regNumber' => 'required',
         'pay_regDate' => 'required',
-        'pay_name' => 'required',
+        'patients_id' => 'required',
         'pay_subtotal' => 'required',
         'pay_vat' => 'required',
         'pay_total' => 'required'
     ];
 
-    
+    public function patients(){
+      return $this->belongsTo(Patient::class);
+    }
 }
