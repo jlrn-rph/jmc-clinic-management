@@ -44,7 +44,6 @@ class ConsultController extends AppBaseController
        */
     public function create()
     {
-         //$patients = Patient::all();
         // $consult = Consult::all();
         return view('consults.create');
     }
@@ -96,14 +95,14 @@ class ConsultController extends AppBaseController
     public function edit($id)
     {
         $consult = $this->consultRepository->find($id);
-
+        $patients = Patient::all();
         if (empty($consult)) {
             Flash::error('Consult not found');
 
             return redirect(route('consults.index'));
         }
 
-        return view('consults.edit')->with('consult', $consult);
+        return view('consults.edit', compact('patients'))->with('consult', $consult);
     }
 
     /**
