@@ -5,10 +5,15 @@
 </div>
 
 <!-- Role Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('role', 'Role:') !!}
-    {!! Form::text('role', null, ['class' => 'form-control']) !!}
-</div>
+<div class="form-group col-sm-12">
+  <label for="role_id">Employee role: </label>
+  <select name="role_id" id="role_id" class="selectpicker" data-live-search="true">
+      <option value=""> Select Role</option>
+    @foreach($roles as $role)
+      <option value="{{$role->id}}"> {{$role->role_name}}</option>
+    @endforeach
+  </select>
+</div> 
 
 <!-- Email Field -->
 <div class="form-group col-sm-6">
