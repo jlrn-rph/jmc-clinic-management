@@ -106,8 +106,8 @@ class Doctor extends Model
         'dr_status' => 'required'
     ];
 
-    public function patient(){
-      return $this->hasMany(App\Patient::class);
+    public function patients(){
+      return $this->hasMany(Patient::class);
     }
     
 }
