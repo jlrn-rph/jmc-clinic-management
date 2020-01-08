@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use App\Role;
 
 class UserController extends AppBaseController
 {
@@ -30,8 +31,8 @@ class UserController extends AppBaseController
     public function index(Request $request)
     {
         $users = $this->userRepository->all();
-
-        return view('users.index')
+        $roles = Role::all();
+        return view('users.index', compact('roles'))
             ->with('users', $users);
     }
 
@@ -42,7 +43,8 @@ class UserController extends AppBaseController
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all();
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -55,7 +57,7 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
-
+        $roles = Role::all();
         $user = $this->userRepository->create($input);
 
         Flash::success('User saved successfully.');
@@ -73,14 +75,14 @@ class UserController extends AppBaseController
     public function show($id)
     {
         $user = $this->userRepository->find($id);
-
+        $roles = Role::all();
         if (empty($user)) {
             Flash::error('User not found');
 
             return redirect(route('users.index'));
         }
 
-        return view('users.show')->with('user', $user);
+        return view('users.show', compact('roles'))->with('user', $user);
     }
 
     /**
@@ -93,14 +95,14 @@ class UserController extends AppBaseController
     public function edit($id)
     {
         $user = $this->userRepository->find($id);
-
+        $roles = Role::all();
         if (empty($user)) {
             Flash::error('User not found');
 
             return redirect(route('users.index'));
         }
 
-        return view('users.edit')->with('user', $user);
+        return view('users.edit', compact('roles'))->with('user', $user);
     }
 
     /**
