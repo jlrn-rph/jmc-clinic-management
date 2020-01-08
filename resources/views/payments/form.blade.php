@@ -21,9 +21,14 @@
 
 <!-- Pay Name Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('pay_name', 'Patient Name:') !!}
-    {!! Form::text('pay_name', null, ['class' => 'form-control']) !!}
-</div>
+  <label for="patients_id">Patient Name: </label>
+  <select name="patients_id" id="patients_id" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
+      <option value=""> Select Patient</option>
+    @foreach($patients as $patient)
+      <option value="{{$patient->id}}"}}> {{$patient->px_name}}</option>
+    @endforeach
+  </select>
+</div> 
 
 <!-- Pay Address Field -->
 <div class="form-group col-sm-12 col-lg-12">
