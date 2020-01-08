@@ -21,7 +21,7 @@
             <tr>
                 <td>{{ $payment->pay_regNumber }}</td>
                 <td>{{ $payment->pay_regDate }}</td>
-                <td>{{ $payment->pay_name }}</td>
+                <td>{{ $payment->patients->px_name }}</td>
                 <!--<td>{{ $payment->pay_address }}</td>-->
                 <!--<td>{{ $payment->pay_admission }}</td>-->
                 <!--<td>{{ $payment->pay_consultation }}</td>-->
