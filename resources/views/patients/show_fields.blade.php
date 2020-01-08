@@ -55,7 +55,7 @@
 <!-- Px Doctor Field -->
 <div class="form-group">
     {!! Form::label('px_doctor', 'Doctor-in-Charge:') !!}
-    <p>{{ $patient->px_doctor }}</p>
+    <p>{{ $patient->px_doctor}}</p>
 </div>
 
 <!-- Px Status Field -->
