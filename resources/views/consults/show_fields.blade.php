@@ -1,3 +1,8 @@
+<div class="form-group">
+    {!! Form::label('patients_id', 'Patient Name') !!}
+    <p>{{ $consult->patients->px_name }}</p>
+</div>
+
 <!-- Con Datesxstart Field -->
 <div class="form-group">
     {!! Form::label('con_dateSxStart', 'Date') !!}
