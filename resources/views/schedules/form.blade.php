@@ -1,7 +1,11 @@
 <!-- Sched Doctor Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('sched_doctor', 'Doctor:') !!}
-    {!! Form::text('sched_doctor', null, ['class' => 'form-control']) !!}
+    <select name="sched_doctor" id="sched_doctor" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Doctor" title="Select Doctor">
+       @foreach($doctors as $doctor)
+           <option value="{{$doctor->dr_name}}"> {{$doctor->dr_name}}</option>
+       @endforeach
+    </select>
 </div>
 
 <!-- Sched Day Field -->
