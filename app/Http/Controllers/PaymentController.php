@@ -9,6 +9,8 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use App\Patient;
+
 
 class PaymentController extends AppBaseController
 {
@@ -30,8 +32,8 @@ class PaymentController extends AppBaseController
     public function index(Request $request)
     {
         $payments = $this->paymentRepository->all();
-
-        return view('payments.index')
+        $patients = Patient::all();
+        return view('payments.index', compact('patients'))
             ->with('payments', $payments);
     }
 
@@ -42,7 +44,8 @@ class PaymentController extends AppBaseController
      */
     public function create()
     {
-        return view('payments.create');
+        $patients = Patient::all();
+        return view('payments.create', compact('patients'));
     }
 
     /**
@@ -73,14 +76,14 @@ class PaymentController extends AppBaseController
     public function show($id)
     {
         $payment = $this->paymentRepository->find($id);
-
+        $patients = Patient::all();
         if (empty($payment)) {
             Flash::error('Payment not found');
 
             return redirect(route('payments.index'));
         }
 
-        return view('payments.show')->with('payment', $payment);
+        return view('payments.show', compact('patients'))->with('payment', $payment);
     }
 
     /**
@@ -93,14 +96,14 @@ class PaymentController extends AppBaseController
     public function edit($id)
     {
         $payment = $this->paymentRepository->find($id);
-
+        $patients = Patient::all();
         if (empty($payment)) {
             Flash::error('Payment not found');
 
             return redirect(route('payments.index'));
         }
 
-        return view('payments.edit')->with('payment', $payment);
+        return view('payments.edit', compact('patients'))->with('payment', $payment);
     }
 
     /**
