@@ -1,31 +1,35 @@
+<li>
+  <a href="/"><i class="fa fa-dashboard"></i><span>Dashboard</span></a
+</li>
+
 <li class="treeview">
 <a href="#">
-  <i class="fa fa-dashboard"></i> <span>Appointment</span>
+  <i class="fa fa-calendar"></i> <span>Appointment</span>
   <span class="pull-right-container">
     <i class="fa fa-angle-left pull right"></i>
   </span>
 </a>
 <ul class="treeview-menu">
     <li class="{{ Request::is('appointments*') ? 'active' : '' }}">
-        <a href="{{ route('appointments.create') }}"><i class="fa fa-edit"></i><span>Add Appointment</span></a>
+        <a href="{{ route('appointments.create') }}"><i class="fa fa-calendar-plus-o"></i><span>Add Appointment</span></a>
     </li>
 
     <li class="{{ Request::is('appointments*') ? 'active' : '' }}">
-        <a href="{{ route('appointments.index') }}"><i class="fa fa-edit"></i><span>Appointment List</span></a>
+        <a href="{{ route('appointments.index') }}"><i class="fa fa-calendar-o"></i><span>Appointment List</span></a>
     </li>
 </ul>
 </li>
 
 <li class="treeview">
 <a href="#">
-  <i class="fa fa-dashboard"></i> <span>Patient</span>
+  <i class="fa fa-wheelchair"></i> <span>Patient</span>
   <span class="pull-right-container">
     <i class="fa fa-angle-left pull right"></i>
   </span>
 </a>
 <ul class="treeview-menu">
     <li class="{{ Request::is('patients*') ? 'active' : '' }}">
-        <a href="{{ route('patients.create') }}"><i class="fa fa-user-circle"></i><span>Add Patient</span></a>
+        <a href="{{ route('patients.create') }}"><i class="fa fa-user-plus"></i><span>Add Patient</span></a>
     </li>
 
     <li class="{{ Request::is('patients*') ? 'active' : '' }}">
@@ -44,14 +48,14 @@
 
 <li class="treeview">
 <a href="#">
-  <i class="fa fa-dashboard"></i> <span>Doctor</span>
+  <i class="fa fa-user-md"></i> <span>Doctor</span>
   <span class="pull-right-container">
     <i class="fa fa-angle-left pull right"></i>
   </span>
 </a>
 <ul class="treeview-menu">
   <li class="{{ Request::is('doctors*') ? 'active' : '' }}">
-      <a href="{{ route('doctors.create') }}"><i class="fa fa-user-md"></i><span>Add Doctor</span></a>
+      <a href="{{ route('doctors.create') }}"><i class="fa fa-user-plus"></i><span>Add Doctor</span></a>
   </li>
 
   <li class="{{ Request::is('doctors*') ? 'active' : '' }}">
@@ -59,25 +63,25 @@
   </li>
 
     <li class="{{ Request::is('specialists*') ? 'active' : '' }}">
-        <a href="{{ route('specialists.index') }}"><i class="fa fa-edit"></i><span>Specialists</span></a>
+        <a href="{{ route('specialists.index') }}"><i class="fa fa-user"></i><span>Specialists</span></a>
     </li>
 </ul>
 </li>
 
 <li class="treeview">
 <a href="#">
-  <i class="fa fa-dashboard"></i> <span>Laboratory</span>
+  <i class="fa fa-flask"></i> <span>Laboratory</span>
   <span class="pull-right-container">
     <i class="fa fa-angle-left pull right"></i>
   </span>
 </a>
 <ul class="treeview-menu">
     <li class="{{ Request::is('laboratories*') ? 'active' : '' }}">
-        <a href="{{ route('laboratories.create') }}"><i class="fa fa-edit"></i><span>Add Laboratory</span></a>
+        <a href="{{ route('laboratories.create') }}"><i class="fa fa-flask"></i><span>Add Laboratory</span></a>
     </li>
 
     <li class="{{ Request::is('laboratories*') ? 'active' : '' }}">
-        <a href="{{ route('laboratories.index') }}"><i class="fa fa-edit"></i><span>Laboratories List</span></a>
+        <a href="{{ route('laboratories.index') }}"><i class="fa fa-flask"></i><span>Laboratories List</span></a>
     </li>
 
     <li class="{{ Request::is('labTests*') ? 'active' : '' }}">
@@ -92,25 +96,25 @@
 
 <li class="treeview">
 <a href="#">
-  <i class="fa fa-dashboard"></i> <span>Payment</span>
+  <i class="fa fa-money"></i> <span>Payment</span>
   <span class="pull-right-container">
     <i class="fa fa-angle-left pull right"></i>
   </span>
 </a>
 <ul class="treeview-menu">
     <li class="{{ Request::is('payments*') ? 'active' : '' }}">
-        <a href="{{ route('payments.create') }}"><i class="fa fa-user-md"></i><span>Add Payment</span></a>
+        <a href="{{ route('payments.create') }}"><i class="fa fa-money"></i><span>Add Payment</span></a>
     </li>
 
     <li class="{{ Request::is('payments*') ? 'active' : '' }}">
-        <a href="{{ route('payments.index') }}"><i class="fa fa-edit"></i><span>Payments</span></a>
+        <a href="{{ route('payments.index') }}"><i class="fa fa-credit-card"></i><span>Payments</span></a>
     </li>
   </ul>
 </li>
 
 <li class="treeview">
 <a href="#">
-  <i class="fa fa-dashboard"></i> <span>Stock</span>
+  <i class="fa fa-archive"></i> <span>Stock</span>
   <span class="pull-right-container">
     <i class="fa fa-angle-left pull right"></i>
   </span>
@@ -136,7 +140,7 @@
 
 <li class="treeview">
 <a href="#">
-  <i class="fa fa-dashboard"></i> <span>Users</span>
+  <i class="fa fa-users"></i> <span>Users</span>
   <span class="pull-right-container">
     <i class="fa fa-angle-left pull right"></i>
   </span>

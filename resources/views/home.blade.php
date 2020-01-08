@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
     <div class="row">
-
       @include('form')
     </div>
 </div>

@@ -17,8 +17,8 @@
 @section('scripts')
     <script type="text/javascript">
         $('#con_dateSxStart').datetimepicker({
-            format: 'YYYY-MM-DD',
-            useCurrent: false
+          format: 'YYYY-MM-DD',
+          minDate: Date()
         })
     </script>
 @endsection
@@ -26,7 +26,7 @@
 <!-- Con Height Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('con_height', 'Height:') !!}
-    {!! Form::text('con_height', null, ['class' => 'form-control'], old('con_height') ?? $consults ?? '') !!}
+    {!! Form::text('con_height', null, ['class' => 'form-control'] !!}
 </div>
 
 <!-- Con Weight Field -->
