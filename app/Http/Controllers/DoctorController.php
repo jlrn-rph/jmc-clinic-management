@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use App\Specialist;
 
 class DoctorController extends AppBaseController
 {
@@ -30,8 +31,8 @@ class DoctorController extends AppBaseController
     public function index(Request $request)
     {
         $doctors = $this->doctorRepository->all();
-
-        return view('doctors.index')
+        $specialization = Specialist::all();
+        return view('doctors.index', compact('specialization'))
             ->with('doctors', $doctors);
     }
 
@@ -42,7 +43,8 @@ class DoctorController extends AppBaseController
      */
     public function create()
     {
-        return view('doctors.create');
+        $specialization = Specialist::all();
+        return view('doctors.create', compact('specialization'));
     }
 
     /**
@@ -55,7 +57,7 @@ class DoctorController extends AppBaseController
     public function store(CreateDoctorRequest $request)
     {
         $input = $request->all();
-
+        $specialization = Specialist::all();
         $doctor = $this->doctorRepository->create($input);
 
         Flash::success('Doctor saved successfully.');
@@ -73,14 +75,14 @@ class DoctorController extends AppBaseController
     public function show($id)
     {
         $doctor = $this->doctorRepository->find($id);
-
+        $specialization = Specialist::all();
         if (empty($doctor)) {
             Flash::error('Doctor not found');
 
             return redirect(route('doctors.index'));
         }
 
-        return view('doctors.show')->with('doctor', $doctor);
+        return view('doctors.show', compact('specialization'))->with('doctor', $doctor);
     }
 
     /**
@@ -93,14 +95,14 @@ class DoctorController extends AppBaseController
     public function edit($id)
     {
         $doctor = $this->doctorRepository->find($id);
-
+        $specialization = Specialist::all();
         if (empty($doctor)) {
             Flash::error('Doctor not found');
 
             return redirect(route('doctors.index'));
         }
 
-        return view('doctors.edit')->with('doctor', $doctor);
+        return view('doctors.edit', compact('specialization'))->with('doctor', $doctor);
     }
 
     /**
