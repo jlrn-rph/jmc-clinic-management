@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use App\Patient;
 
 class PrescriptionController extends AppBaseController
 {
@@ -30,8 +31,8 @@ class PrescriptionController extends AppBaseController
     public function index(Request $request)
     {
         $prescriptions = $this->prescriptionRepository->all();
-
-        return view('prescriptions.index')
+        $patients = Patient::all();
+        return view('prescriptions.index', compact('patients'))
             ->with('prescriptions', $prescriptions);
     }
 
@@ -55,7 +56,7 @@ class PrescriptionController extends AppBaseController
     public function store(CreatePrescriptionRequest $request)
     {
         $input = $request->all();
-
+        $patients = Patient::all();
         $prescription = $this->prescriptionRepository->create($input);
 
         Flash::success('Prescription saved successfully.');
@@ -73,14 +74,14 @@ class PrescriptionController extends AppBaseController
     public function show($id)
     {
         $prescription = $this->prescriptionRepository->find($id);
-
+        $patients = Patient::all();
         if (empty($prescription)) {
             Flash::error('Prescription not found');
 
             return redirect(route('prescriptions.index'));
         }
 
-        return view('prescriptions.show')->with('prescription', $prescription);
+        return view('prescriptions.show', compact('patients'))->with('prescription', $prescription);
     }
 
     /**
@@ -93,14 +94,14 @@ class PrescriptionController extends AppBaseController
     public function edit($id)
     {
         $prescription = $this->prescriptionRepository->find($id);
-
+        $patients = Patient::all();
         if (empty($prescription)) {
             Flash::error('Prescription not found');
 
             return redirect(route('prescriptions.index'));
         }
 
-        return view('prescriptions.edit')->with('prescription', $prescription);
+        return view('prescriptions.edit', compact('patients'))->with('prescription', $prescription);
     }
 
     /**
