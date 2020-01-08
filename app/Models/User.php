@@ -33,7 +33,7 @@ class User extends Model
 
     public $fillable = [
         'name',
-        'role',
+        'role_id',
         'email',
         'email_verified_at',
         'password',
@@ -48,7 +48,7 @@ class User extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
-        'role' => 'string',
+        'role_id' => 'string',
         'email' => 'string',
         'email_verified_at' => 'datetime',
         'password' => 'string',
@@ -62,10 +62,13 @@ class User extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'role' => 'required',
+        'role_id' => 'required',
         'email' => 'required',
         'password' => 'required'
     ];
 
-    
+    public function role(){
+      return $this->belongsTo(\App\Role::class);
+    }
+ 
 }
