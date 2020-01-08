@@ -13,8 +13,8 @@
 @section('scripts')
     <script type="text/javascript">
         $('#lab_regDate').datetimepicker({
-            format: 'YYYY-MM-DD',
-            useCurrent: false
+          format: 'YYYY-MM-DD',
+          minDate: Date()
         })
     </script>
 @endsection
