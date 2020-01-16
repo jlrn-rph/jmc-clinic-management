@@ -1,3 +1,6 @@
+<div>
+  @include('search')
+</div>
 <div class="table-responsive">
     <table class="table" id="patients-table">
         <thead>
@@ -17,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($patients as $patient)
+        @foreach($patient as $patient)
           <tr>
             <td>{{ $patient->px_regNumber }}</td>
             <td>{{ $patient->px_regDate }}</td>

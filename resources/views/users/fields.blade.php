@@ -1,55 +1,20 @@
-<!-- Name Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('name', 'Name:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Role Field -->
-<div class="form-group col-sm-12">
-  <label for="role_id">Employee role: </label>
-  <select name="role_id" id="role_id" class="selectpicker" data-live-search="true">
-      <option value=""> Select Role</option>
-    @foreach($roles as $role)
-      <option value="{{$role->id}}"> {{$role->role_name}}</option>
-    @endforeach
-  </select>
-</div> 
-
-<!-- Email Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('email', 'Email:') !!}
-    {!! Form::email('email', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Email Verified At Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('email_verified_at', 'Email Verified At:') !!}
-    {!! Form::date('email_verified_at', null, ['class' => 'form-control','id'=>'email_verified_at']) !!}
-</div>
-
-@section('scripts')
-    <script type="text/javascript">
-        $('#email_verified_at').datetimepicker({
-            format: 'YYYY-MM-DD',
-            useCurrent: false
-        })
-    </script>
-@endsection
-
-<!-- Password Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('password', 'Password:') !!}
-    {!! Form::password('password', ['class' => 'form-control']) !!}
-</div>
-
-<!-- Remember Token Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('remember_token', 'Remember Token:') !!}
-    {!! Form::text('remember_token', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Submit Field -->
-<div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{{ route('users.index') }}" class="btn btn-default">Cancel</a>
+<!-- Modal -->
+<div class="modal fade" id="add-new-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">New User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        @include('users.form1')
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        {!! Form::submit('Save User', ['class' => 'btn btn-success']) !!}
+      </div>
+    </div>
+  </div>
 </div>

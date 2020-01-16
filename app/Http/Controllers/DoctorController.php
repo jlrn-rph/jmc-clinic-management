@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Specialist;
+use DB;
 
 class DoctorController extends AppBaseController
 {
@@ -30,7 +31,7 @@ class DoctorController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $doctors = $this->doctorRepository->all();
+        $doctors = $this->doctorRepository->paginate(15);
         $specialization = Specialist::all();
         return view('doctors.index', compact('specialization'))
             ->with('doctors', $doctors);
@@ -128,6 +129,22 @@ class DoctorController extends AppBaseController
         Flash::success('Doctor updated successfully.');
 
         return redirect(route('doctors.index'));
+    }
+
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $doctors = DB::table('doctors')->where('dr_name','like',"%$query%")
+                        ->orWhere('dr_specialist','like',"%$query%")
+                        ->orWhere('dr_status','like',"%$query%")
+                        ->paginate(15);
+
+      return view('doctors.search-results')->with('doctors', $doctors);
     }
 
     /**

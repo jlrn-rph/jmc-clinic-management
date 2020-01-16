@@ -27,12 +27,14 @@ Route::resource('users', 'UserController');
 Route::resource('roles', 'RoleController');
 
 Route::resource('patients', 'PatientController');
+Route::get('patients.search', 'PatientController@search')->name('search');
 
 Route::resource('appointments', 'AppointmentController');
 
 Route::resource('consults', 'ConsultController');
 
 Route::resource('doctors', 'DoctorController');
+Route::get('doctors.search', 'DoctorController@search')->name('search');
 
 Route::resource('prescriptions', 'PrescriptionController');
 

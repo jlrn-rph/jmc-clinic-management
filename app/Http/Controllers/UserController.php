@@ -44,7 +44,8 @@ class UserController extends AppBaseController
     public function create()
     {
         $roles = Role::all();
-        return view('users.create', compact('roles'));
+        $user = $this->userRepository->all();
+        return view('users.create', compact('roles'))->with('user', $user);;
     }
 
     /**

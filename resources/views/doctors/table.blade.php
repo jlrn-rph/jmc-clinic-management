@@ -1,3 +1,6 @@
+<div>
+  @include('search')
+</div>
 <div class="table-responsive">
     <table class="table" id="doctors-table">
         <thead>

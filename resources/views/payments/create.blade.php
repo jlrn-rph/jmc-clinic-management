@@ -13,7 +13,7 @@
                 <div class="row">
                     {!! Form::open(['route' => 'payments.store']) !!}
 
-                    @include('payments.form')
+                    @include('payments.form1')
                     <div class="col-sm-12">
                       <a class="btn btn-close" href="{{ route('payments.index') }}">Cancel</a>
                       {!! Form::submit('Add Payment', ['class' => 'btn btn-info']) !!}

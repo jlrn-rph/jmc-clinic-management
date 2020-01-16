@@ -7,7 +7,7 @@
 <!-- Role Field -->
 <div class="form-group">
     {!! Form::label('role', 'Role:') !!}
-    <p>{{ $user->role_id}}</p>
+    <p>{{ $user->role->role_name}}</p>
 </div>
 
 <!-- Email Field -->
@@ -33,4 +33,3 @@
     {!! Form::label('remember_token', 'Remember Token:') !!}
     <p>{{ $user->remember_token }}</p>
 </div>
-

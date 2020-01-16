@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        @include('laboratories.form')
+        @include('laboratories.form1')
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

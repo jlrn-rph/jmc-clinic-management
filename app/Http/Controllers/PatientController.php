@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Patient;
 use App\Http\Requests\CreatePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Repositories\PatientRepository;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Doctor;
 use Flash;
 use Response;
+use DB;
+
 
 class PatientController extends AppBaseController
 {
@@ -31,9 +35,9 @@ class PatientController extends AppBaseController
     public function index(Request $request)
     {
         $doctors = Doctor::all();
-        $patients = $this->patientRepository->all();
+        $patient = $this->patientRepository->paginate(15);
         return view('patients.index', compact('doctors'))
-            ->with('patients', $patients);
+            ->with('patient', $patient);
     }
 
     /**
@@ -61,6 +65,7 @@ class PatientController extends AppBaseController
         $patient = $this->patientRepository->create($input);
 
         Flash::success('Patient saved successfully.');
+
 
         return redirect(route('patients.index'));
     }
@@ -128,6 +133,23 @@ class PatientController extends AppBaseController
         Flash::success('Patient updated successfully.');
 
         return redirect(route('patients.index'));
+    }
+
+    public function search(Request $request)
+    {
+      $patients = $this->patientRepository->all();
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $patients = DB::table('patients')->where('px_name','like',"%$query%")
+                        ->orWhere('px_doctor','like',"%$query%")
+                        ->orWhere('px_status','like',"%$query%")
+                        ->paginate(15);
+
+      return view('patients.search-results')->with('patients', $patients);
     }
 
     /**

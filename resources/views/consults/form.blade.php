@@ -1,17 +1,16 @@
 <div class="form-group col-sm-12">
   <label for="patients_id">Patient Name: </label>
   <select name="patients_id" id="patients_id" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
-      <option value=""> Select Patient</option>
-    @foreach($patients as $patient)
-      <option value="{{$patient->id}}"}}> {{$patient->px_name}}</option>
+    @foreach($patient as $patient)
+      <option value="{{$patient->id}}"{{ $patient->id == $consult->patients_id ? 'selected' :'' }}> {{$patient->px_name}}</option>
     @endforeach
   </select>
-</div> 
+</div>
 
 <!-- Con Datesxstart Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('con_dateSxStart', 'Date:') !!}
-    {!! Form::date('con_dateSxStart', null, ['class' => 'form-control','id'=>'con_dateSxStart', 'required']) !!}
+    {!! Form::date('con_dateSxStart', $consult->con_dateSxStart, ['class' => 'form-control','id'=>'con_dateSxStart', 'required']) !!}
 </div>
 
 @section('scripts')
@@ -22,11 +21,11 @@
         })
     </script>
 @endsection
- 
+
 <!-- Con Height Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('con_height', 'Height:') !!}
-    {!! Form::text('con_height', null, ['class' => 'form-control'] !!}
+    {!! Form::text('con_height', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Con Weight Field -->

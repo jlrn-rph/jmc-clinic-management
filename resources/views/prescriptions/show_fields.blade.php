@@ -1,5 +1,11 @@
 <!-- Rx Generic Field -->
 <div class="form-group">
+    {!! Form::label('px_name', 'Patient Name:') !!}
+    <p>{{ $prescription->px_name }}</p>
+</div>
+
+<!-- Rx Generic Field -->
+<div class="form-group">
     {!! Form::label('rx_generic', 'Generic Name:') !!}
     <p>{{ $prescription->rx_generic }}</p>
 </div>

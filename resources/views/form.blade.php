@@ -1,3 +1,5 @@
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
@@ -60,3 +62,4 @@
         <!-- ./col -->
       </div>
       <!-- /.row -->
+@include('calendar')

@@ -78,19 +78,12 @@
             {!! Form::label('px_doctor', 'Doctor-in-Charge:') !!} {{ $patient->px_doctor }}
         </div>
 
-<<<<<<< HEAD
-<!-- Px Doctor Field -->
-<div class="form-group">
-    {!! Form::label('px_doctor', 'Doctor-in-Charge:') !!}
-    <p>{{ $patient->px_doctor}}</p>
-=======
         <!-- Px Status Field -->
         <div class="form-group">
             {!! Form::label('px_status', 'Status:') !!} {{ $patient->px_status }}
         </div>
     </div>
   </div>
->>>>>>> 2d4b36c7865f755c8c88ec4517d0b67ab30baead
 </div>
 
 <hr>
@@ -100,7 +93,10 @@
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Consults</a></li>
+              <li class="active"><a href="#tab_1" data-toggle="tab">
+                
+
+              </a></li>
               <li><a href="#tab_2" data-toggle="tab">Prescription</a></li>
               <li><a href="#tab_3" data-toggle="tab">Laboratory</a></li>
             </ul>

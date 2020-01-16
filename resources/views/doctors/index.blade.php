@@ -23,8 +23,8 @@
                     {!! Form::close() !!}
             </div>
         </div>
-        <div class="text-center">
-
+        <div class="pagination navigation">
+          {{ $doctors->links() }}
         </div>
     </div>
 @endsection

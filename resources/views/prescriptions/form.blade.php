@@ -1,9 +1,9 @@
 <!-- Rx Generic Field -->
 <div class="form-group col-sm-12">
-  <label for="patients_id">Patient Name: </label>
-  <select name="patients_id" id="patients_id" class="form-control selectpicker" data-live-search="true" title="Select Patient">
+  <label for="px_name">Patient Name: </label>
+  <select name="px_name" id="px_name" class="form-control selectpicker" data-live-search="true" title="Select Patient">
     @foreach($patients as $patient)
-      <option value="{{$patient->id}}"> {{$patient->px_name}}</option>
+      <option value="{{$patient->px_name}}"{{ $patient->px_name == $prescription->px_name ? 'selected' : ''}}> {{$patient->px_name}}</option>
     @endforeach
   </select>
 </div>

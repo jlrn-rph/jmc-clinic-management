@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Patient;
+use App\Consult;
 
 class ConsultController extends AppBaseController
 {
@@ -44,7 +45,7 @@ class ConsultController extends AppBaseController
        */
     public function create()
     {
-        // $consult = Consult::all();
+         $consult = Consult::all();
         return view('consults.create');
     }
 
@@ -75,7 +76,7 @@ class ConsultController extends AppBaseController
     public function show($id)
     {
         $consult = $this->consultRepository->find($id);
-
+        
         if (empty($consult)) {
             Flash::error('Consult not found');
 

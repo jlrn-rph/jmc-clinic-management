@@ -88,6 +88,7 @@ class Patient extends Model
         'px_status' => 'required'
     ];
 
+
     public function consult(){
       return $this->belongsTo(Consult::class);
     }
@@ -99,5 +100,5 @@ class Patient extends Model
     public function payment(){
       return $this->hasMany(Payment::class);
     }
-    
+
 }
