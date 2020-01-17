@@ -2,6 +2,7 @@
     <table class="table" id="prescriptions-table">
         <thead>
             <tr>
+                <th>Patient Name</th>
                 <th>Generic Name</th>
                 <th>Brand Name</th>
                 <th>Frequency</th>
@@ -13,6 +14,7 @@
         <tbody>
         @foreach($prescriptions as $prescription)
             <tr>
+                <td>{{ $prescription->px_name }}</td>
                 <td>{{ $prescription->rx_generic }}</td>
                 <td>{{ $prescription->rx_brand }}</td>
                 <td>{{ $prescription->rx_freq }}</td>

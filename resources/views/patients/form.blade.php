@@ -7,7 +7,7 @@
 <!-- Px Regdate Field -->
 <div class="form-group col-sm-4">
     {!! Form::label('px_regDate', 'Registered Date:') !!}
-    {!! Form::date('px_regDate', null, ['class' => 'form-control','id'=>'px_regDate', 'required']) !!}
+    {!! Form::date('px_regDate', $patient->px_regDate, ['class' => 'form-control','id'=>'px_regDate', 'required']) !!}
 </div>
 
 @section('scripts')
@@ -40,7 +40,7 @@
 <!-- Px Dob Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('px_dob', 'Date of Birth:') !!}
-    {!! Form::date('px_dob', null, ['class' => 'form-control','id'=>'px_dob', 'required']) !!}
+    {!! Form::date('px_dob', $patient->px_dob, ['class' => 'form-control','id'=>'px_dob', 'required']) !!}
 </div>
 
 @section('scripts')
@@ -55,7 +55,7 @@
 <!-- Px Gender Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('px_gender', 'Sex:') !!}
-    {!! Form::select('px_gender', ['Male' => 'Male', 'Female' => 'Female'], ['class' => 'form-control', 'required'], ['placeholder' => 'Select Sex']) !!}
+    {!! Form::select('px_gender', ['Male' => 'Male', 'Female' => 'Female'],$patient->px_gender, ['class' => 'form-control', 'required'], ['placeholder' => 'Select Sex']) !!}
 </div>
 
 <!-- Px Contact Field -->
@@ -75,7 +75,7 @@
     {!! Form::label('px_doctor', 'Doctor-in-Charge:') !!}
       <select name="px_doctor" id="px_doctor" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Doctor" title="Select Doctor">
         @foreach($doctors as $doctor)
-            <option value="{{$doctor->dr_name}}"> {{$doctor->dr_name}}</option>
+            <option value="{{$doctor->dr_name}}" {{ $doctor->dr_name == $patient->px_doctor ? 'selected' : '' }}> {{$doctor->dr_name}}</option>
         @endforeach
       </select>
 </div>

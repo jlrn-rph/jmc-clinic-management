@@ -3,7 +3,7 @@
     {!! Form::label('sched_doctor', 'Doctor:') !!}
     <select name="sched_doctor" id="sched_doctor" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Doctor" title="Select Doctor">
        @foreach($doctors as $doctor)
-           <option value="{{$doctor->dr_name}}"> {{$doctor->dr_name}}</option>
+           <option value="{{$doctor->dr_name}}"{{ $doctor->dr_name == $schedule->sched_doctor ? 'selected' : ''}}> {{$doctor->dr_name}}</option>
        @endforeach
     </select>
 </div>

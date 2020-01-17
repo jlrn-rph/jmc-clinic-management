@@ -7,7 +7,7 @@
 <!-- Pay Regdate Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('pay_regDate', 'Date:') !!}
-    {!! Form::date('pay_regDate', null, ['class' => 'form-control','id'=>'pay_regDate']) !!}
+    {!! Form::date('pay_regDate', $payment->pay_regDate, ['class' => 'form-control','id'=>'pay_regDate']) !!}
 </div>
 
 @section('scripts')
@@ -23,12 +23,11 @@
 <div class="form-group col-sm-12">
   <label for="patients_id">Patient Name: </label>
   <select name="patients_id" id="patients_id" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
-      <option value=""> Select Patient</option>
     @foreach($patients as $patient)
-      <option value="{{$patient->id}}"}}> {{$patient->px_name}}</option>
+      <option value="{{$patient->id}}"{{ $patient->id == $payment->patients_id ? 'selected' : ''}}> {{$patient->px_name}}</option>
     @endforeach
   </select>
-</div> 
+</div>
 
 <!-- Pay Address Field -->
 <div class="form-group col-sm-12 col-lg-12">

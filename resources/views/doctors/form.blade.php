@@ -7,7 +7,7 @@
 <!-- Dr Regdate Field -->
 <div class="form-group col-sm-4">
     {!! Form::label('dr_regDate', 'Date of Registration:') !!}
-    {!! Form::date('dr_regDate', null, ['class' => 'form-control','id'=>'dr_regDate', 'required']) !!}
+    {!! Form::date('dr_regDate', $doctor->dr_regDate, ['class' => 'form-control','id'=>'dr_regDate', 'required']) !!}
 </div>
 
 @section('scripts')
@@ -30,10 +30,10 @@
     {!! Form::label('dr_specialist', 'Specialization:') !!}
       <select name="dr_specialist" id="dr_specialist" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Specialization" title="Select Specialization">
         @foreach($specialization as $specialize)
-          <option value="{{$specialize->id}}"}}> {{$specialize->sp_name}}</option>
+          <option value="{{$specialize->sp_name}}"{{ $specialize->sp_name == $doctor->dr_specialist ? 'selected' : ''}}> {{$specialize->sp_name}}</option>
         @endforeach
       </select>
-</div> 
+</div>
 
 <!-- Dr License Field -->
 <div class="form-group col-sm-6">

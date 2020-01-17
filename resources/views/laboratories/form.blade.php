@@ -7,7 +7,7 @@
 <!-- Lab Regdate Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_regDate', 'Registration Date:') !!}
-    {!! Form::date('lab_regDate', null, ['class' => 'form-control','id'=>'lab_regDate', 'required']) !!}
+    {!! Form::date('lab_regDate', $laboratory->lab_regDate, ['class' => 'form-control','id'=>'lab_regDate', 'required']) !!}
 </div>
 
 @section('scripts')
@@ -24,7 +24,7 @@
     {!! Form::label('lab_name', 'Patient Name:') !!}
       <select name="lab_name" id="lab_name" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
     @foreach($patients as $patient)
-      <option value="{{$patient->px_name}}"}}> {{$patient->px_name}}</option>
+      <option value="{{$patient->px_name}}"{{ $patient->px_name == $laboratory->lab_name ? 'selected' : ''}}> {{$patient->px_name}}</option>
     @endforeach
   </select>
 </div>
@@ -38,7 +38,7 @@
 <!-- Lab Dob Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_dob', 'Date of Birth:') !!}
-    {!! Form::date('lab_dob', null, ['class' => 'form-control','id'=>'lab_dob', 'required']) !!}
+    {!! Form::date('lab_dob', $laboratory->lab_dob, ['class' => 'form-control','id'=>'lab_dob', 'required']) !!}
 </div>
 
 @section('scripts')
@@ -53,7 +53,8 @@
 <!-- Lab Gender Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_gender', 'Gender:') !!}
-    {!! Form::select('lab_gender', ['Male' => 'Male', 'Female' => 'Female'], ['class' => 'form-control', 'required'], ['placeholder' => 'Select Sex']) !!}
+    {!! Form::select('lab_gender', ['Male' => 'Male', 'Female' => 'Female'], $laboratory->label_gender, ['class' => 'form-control', 'required'], ['placeholder' => 'Select Sex']) !!}
+
 </div>
 
 <!-- Lab Contact Field -->
@@ -77,9 +78,9 @@
 <!-- Lab Test Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_test', 'Test Ordered:') !!}
-    <select name="lab_test" id="lab_test" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
+    <select name="lab_test" id="lab_test" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Test Type" title="Test Type">
     @foreach($labtests as $labtest)
-      <option value="{{$labtest->lt_name}}"}}> {{$labtest->lt_name}}</option>
+      <option value="{{$labtest->lt_name}}"{{$labtest->lt_name == $laboratory->lab_test ? 'selected' : ''}}> {{$labtest->lt_name}}</option>
     @endforeach
   </select>
 </div>

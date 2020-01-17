@@ -20,34 +20,37 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
-Route::resource('specialists', 'SpecialistController');
+Route::resource('specialists', 'SpecialistController')->middleware('auth');
 
-Route::resource('users', 'UserController');
+Route::resource('users', 'UserController')->middleware('auth');
 
-Route::resource('roles', 'RoleController');
+Route::resource('roles', 'RoleController')->middleware('auth');
 
-Route::resource('patients', 'PatientController');
+Route::resource('patients', 'PatientController')->middleware('auth');
 
-Route::resource('appointments', 'AppointmentController');
+Route::resource('appointments', 'AppointmentController')->middleware('auth');
 
-Route::resource('consults', 'ConsultController');
+Route::resource('consults', 'ConsultController')->middleware('auth');
 
-Route::resource('doctors', 'DoctorController');
+Route::resource('doctors', 'DoctorController')->middleware('auth');
 
-Route::resource('prescriptions', 'PrescriptionController');
+Route::resource('prescriptions', 'PrescriptionController')->middleware('auth');
 
-Route::resource('schedules', 'ScheduleController');
+Route::resource('schedules', 'ScheduleController')->middleware('auth');
 
-Route::resource('laboratories', 'LaboratoryController');
+Route::resource('laboratories', 'LaboratoryController')->middleware('auth');
 
-Route::resource('labTests', 'LabTestController');
+Route::resource('labTests', 'LabTestController')->middleware('auth');
 
-Route::resource('payments', 'PaymentController');
+Route::resource('payments', 'PaymentController')->middleware('auth');
 
-Route::resource('items', 'ItemController');
+Route::resource('items', 'ItemController')->middleware('auth');
 
-Route::resource('suppliers', 'SupplierController');
+Route::resource('suppliers', 'SupplierController')->middleware('auth');
 
-Route::resource('purchases', 'PurchaseController');
+Route::resource('purchases', 'PurchaseController')->middleware('auth');
 
-Route::resource('returnPurchases', 'ReturnPurchaseController');
+Route::resource('returnPurchases', 'ReturnPurchaseController')->middleware('auth');
+
+
+Route::resource('staff', 'StaffController');

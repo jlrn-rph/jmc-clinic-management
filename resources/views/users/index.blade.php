@@ -4,23 +4,27 @@
     <section class="content-header">
         <h1 class="pull-left">Users</h1>
         <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('users.create') }}">Add New</a>
+           <a data-toggle="modal" data-target="#add-new-user" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px"><i class="fa fa-plus-circle"></i> New User</a>
         </h1>
     </section>
     <div class="content">
         <div class="clearfix"></div>
 
         @include('flash::message')
-
+        @include('adminlte-templates::common.errors')
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
                     @include('users.table')
+                    {!! Form::open(['route' => 'users.store']) !!}
+
+                        @include('users.fields')
+
+                    {!! Form::close() !!}
             </div>
         </div>
         <div class="text-center">
-        
+
         </div>
     </div>
 @endsection
-

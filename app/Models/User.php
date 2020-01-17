@@ -22,7 +22,7 @@ class User extends Model
     use SoftDeletes;
 
     public $table = 'users';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -68,7 +68,11 @@ class User extends Model
     ];
 
     public function role(){
-      return $this->belongsTo(\App\Role::class);
+      return $this->belongsTo(Role::class,'role_id');
     }
- 
+    public function setPasswordAttribute($value)
+   {
+       $this->attributes['password'] = bcrypt($value);
+   }
+
 }

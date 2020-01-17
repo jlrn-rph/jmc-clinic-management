@@ -34,15 +34,16 @@
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="{{ url('/home') }}"><b>Clinic Management System</b></a>
+        <a href="{{ url('/') }}"><b>Clinic Management System</b></a>
     </div>
 
     <div class="register-box-body">
-        <p class="login-box-msg">Register a new membership</p>
+        <p class="login-box-msg">Register as New Patient</p>
 
         <form method="post" action="{{ url('/register') }}">
             @csrf
-
+            
+            <!-- Name Field-->
             <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
                 <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -53,7 +54,7 @@
                     </span>
                 @endif
             </div>
-
+            <!--Email Field -->
             <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
                 <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

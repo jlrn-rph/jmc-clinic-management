@@ -137,7 +137,7 @@
     </li>
   </ul>
 </li>
-
+@canany(['isAdmin','isPatient']) 
 <li class="treeview">
 <a href="#">
   <i class="fa fa-users"></i> <span>Users</span>
@@ -153,4 +153,8 @@
         <a href="{{ route('roles.index') }}"><i class="fa fa-edit"></i><span>Roles</span></a>
     </li>
   </ul>
+</li>
+@endcan
+<li class="{{ Request::is('staff*') ? 'active' : '' }}">
+    <a href="{{ route('staff.index') }}"><i class="fa fa-edit"></i><span>Staff</span></a>
 </li>

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Patient;
+use App\Consult;
 
 class ConsultController extends AppBaseController
 {
@@ -31,8 +32,8 @@ class ConsultController extends AppBaseController
     public function index(Request $request)
     {
         $consults = $this->consultRepository->all();
-        $patients = Patient::all();
-        return view('consults.index', compact('patients'))
+        $patient = Patient::all();
+        return view('consults.index', compact('patient'))
             ->with('consults', $consults);
     }
 
@@ -44,7 +45,7 @@ class ConsultController extends AppBaseController
        */
     public function create()
     {
-        // $consult = Consult::all();
+         $consult = Consult::all();
         return view('consults.create');
     }
 
@@ -54,7 +55,7 @@ class ConsultController extends AppBaseController
      * @param CreateConsultRequest $request
      *
      *
-      @return Response
+      *@return Response
      */
     public function store(CreateConsultRequest $request)
     {
@@ -95,14 +96,14 @@ class ConsultController extends AppBaseController
     public function edit($id)
     {
         $consult = $this->consultRepository->find($id);
-        $patients = Patient::all();
+        $patient = Patient::all();
         if (empty($consult)) {
             Flash::error('Consult not found');
 
             return redirect(route('consults.index'));
         }
 
-        return view('consults.edit', compact('patients'))->with('consult', $consult);
+        return view('consults.edit', compact('patient'))->with('consult', $consult);
     }
 
     /**

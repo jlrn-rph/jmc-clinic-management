@@ -8,6 +8,7 @@ use App\Repositories\PatientRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use App\Doctor;
+use App\Consult;
 use Flash;
 use Response;
 
@@ -31,9 +32,9 @@ class PatientController extends AppBaseController
     public function index(Request $request)
     {
         $doctors = Doctor::all();
-        $patients = $this->patientRepository->all();
+        $patient = $this->patientRepository->all();
         return view('patients.index', compact('doctors'))
-            ->with('patients', $patients);
+            ->with('patient', $patient);
     }
 
     /**
@@ -75,6 +76,7 @@ class PatientController extends AppBaseController
     public function show($id)
     {
         $patient = $this->patientRepository->find($id);
+        $consults = Consult::all();
         $doctors = Doctor::all();
         if (empty($patient)) {
             Flash::error('Patient not found');
@@ -82,7 +84,7 @@ class PatientController extends AppBaseController
             return redirect(route('patients.index'));
         }
 
-        return view('patients.show', compact('doctors'))->with('patient', $patient);
+        return view('patients.show', compact('doctors', 'consults'))->with('patient', $patient);
     }
 
     /**

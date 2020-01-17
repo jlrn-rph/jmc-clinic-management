@@ -9,6 +9,8 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Gate;
+use App\Helpers;
 
 class AppointmentController extends AppBaseController
 {
@@ -29,6 +31,7 @@ class AppointmentController extends AppBaseController
      */
     public function index(Request $request)
     {
+        return Role::roleAcl();
         $appointments = $this->appointmentRepository->all();
 
         return view('appointments.index')
@@ -42,6 +45,7 @@ class AppointmentController extends AppBaseController
      */
     public function create()
     {
+
         return view('appointments.create');
     }
 
@@ -80,7 +84,7 @@ class AppointmentController extends AppBaseController
             return redirect(route('appointments.index'));
         }
 
-        return view('appointments.show')->with('appointment', $appointment);
+        return view('appointments.show')->with('appointment', $appointment)->paginate();
     }
 
     /**
@@ -153,4 +157,5 @@ class AppointmentController extends AppBaseController
 
         return redirect(route('appointments.index'));
     }
+
 }
