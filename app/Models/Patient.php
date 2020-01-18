@@ -67,7 +67,7 @@ class Patient extends Model
         'px_contact' => 'string',
         'px_email' => 'string',
         'px_doctor' => 'string',
-        'px_status' => 'integer'
+        'px_status' => 'string'
     ];
 
     /**
@@ -90,7 +90,7 @@ class Patient extends Model
 
 
     public function consult(){
-      return $this->belongsTo(Consult::class);
+      return $this->belongsToMany(Consult::class);
     }
 
     public function doctor(){

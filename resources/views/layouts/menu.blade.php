@@ -1,7 +1,10 @@
+@canany(['isAdmin', 'isDoctor', 'isStaff'])
 <li>
   <a href="/"><i class="fa fa-dashboard"></i><span>Dashboard</span></a
 </li>
+@endcan
 
+@canany(['isAdmin', 'isStaff', 'isPatient'])
 <li class="treeview">
 <a href="#">
   <i class="fa fa-calendar"></i> <span>Appointment</span>
@@ -13,13 +16,14 @@
     <li class="{{ Request::is('appointments*') ? 'active' : '' }}">
         <a href="{{ route('appointments.create') }}"><i class="fa fa-calendar-plus-o"></i><span>Add Appointment</span></a>
     </li>
-
     <li class="{{ Request::is('appointments*') ? 'active' : '' }}">
         <a href="{{ route('appointments.index') }}"><i class="fa fa-calendar-o"></i><span>Appointment List</span></a>
     </li>
 </ul>
 </li>
+@endcan
 
+@canany(['isAdmin', 'isDoctor', 'isStaff'])
 <li class="treeview">
 <a href="#">
   <i class="fa fa-wheelchair"></i> <span>Patient</span>
@@ -36,6 +40,7 @@
         <a href="{{ route('patients.index') }}"><i class="fa fa-user-circle"></i><span>Patient List</span></a>
     </li>
 
+@canany(['isAdmin', 'isDoctor'])
     <li class="{{ Request::is('consults*') ? 'active' : '' }}">
         <a href="{{ route('consults.index') }}"><i class="fa fa-edit"></i><span>Consults</span></a>
     </li>
@@ -43,9 +48,12 @@
     <li class="{{ Request::is('prescriptions*') ? 'active' : '' }}">
         <a href="{{ route('prescriptions.index') }}"><i class="fa fa-edit"></i><span>Prescriptions</span></a>
     </li>
+    @endcan
 </ul>
 </li>
+@endcan
 
+@canany('isAdmin')
 <li class="treeview">
 <a href="#">
   <i class="fa fa-user-md"></i> <span>Doctor</span>
@@ -61,13 +69,14 @@
   <li class="{{ Request::is('doctors*') ? 'active' : '' }}">
       <a href="{{ route('doctors.index') }}"><i class="fa fa-user-md"></i><span>Doctors List</span></a>
   </li>
-
     <li class="{{ Request::is('specialists*') ? 'active' : '' }}">
         <a href="{{ route('specialists.index') }}"><i class="fa fa-user"></i><span>Specialists</span></a>
     </li>
 </ul>
 </li>
+@endcan
 
+@canany(['isAdmin', 'isDoctor'])
 <li class="treeview">
 <a href="#">
   <i class="fa fa-flask"></i> <span>Laboratory</span>
@@ -83,17 +92,25 @@
     <li class="{{ Request::is('laboratories*') ? 'active' : '' }}">
         <a href="{{ route('laboratories.index') }}"><i class="fa fa-flask"></i><span>Laboratories List</span></a>
     </li>
-
+@can('isAdmin')
     <li class="{{ Request::is('labTests*') ? 'active' : '' }}">
         <a href="{{ route('labTests.index') }}"><i class="fa fa-edit"></i><span>Lab Tests</span></a>
     </li>
+@endcan
   </ul>
 </li>
+@endcan
 
-<li class="{{ Request::is('schedules*') ? 'active' : '' }}">
+<!-- <li class="{{ Request::is('schedules*') ? 'active' : '' }}">
     <a href="{{ route('schedules.index') }}"><i class="fa fa-edit"></i><span>Schedules</span></a>
+</li> -->
+@can('isAdmin')
+<li class="{{ Request::is('staff*') ? 'active' : '' }}">
+    <a href="{{ route('staff.index') }}"><i class="fa fa-edit"></i><span>Staff</span></a>
 </li>
+@endcan
 
+@canany(['isAdmin', 'isStaff'])
 <li class="treeview">
 <a href="#">
   <i class="fa fa-money"></i> <span>Payment</span>
@@ -137,7 +154,8 @@
     </li>
   </ul>
 </li>
-
+@endcan
+@can('isAdmin')
 <li class="treeview">
 <a href="#">
   <i class="fa fa-users"></i> <span>Users</span>
@@ -154,4 +172,4 @@
     </li>
   </ul>
 </li>
-
+@endcan

@@ -24,7 +24,7 @@
   <label for="patients_id">Patient Name: </label>
   <select name="patients_id" id="patients_id" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
     @foreach($patients as $patient)
-      <option value="{{$patient->id}}"{{ $patient->id == $payment->patients_id ? 'selected' : ''}}> {{$patient->px_name}}</option>
+      <option value="{{$patient->px_name}}"{{ $patient->px_name == $payment->patients_id ? 'selected' : ''}}> {{$patient->px_name}}</option>
     @endforeach
   </select>
 </div>
@@ -76,3 +76,21 @@
     {!! Form::label('pay_total', 'Total:') !!}
     {!! Form::text('pay_total', null, ['class' => 'form-control']) !!}
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+<script>
+$('.price').keyup(function () {
+    var sum = 0;
+    var vat = 0;
+    var sub = 0;
+    $('.price').each(function() {
+        sum += Number($(this).val());
+        vat = sum*.12;
+        sub = sum - vat;
+    });
+    $('#pay_total').val(sum);
+    $('#pay_subtotal').val(sub);
+    $('#pay_vat').val(vat);
+});
+</script>

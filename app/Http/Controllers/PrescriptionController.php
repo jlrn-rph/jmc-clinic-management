@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Patient;
-
+use Gate;
 class PrescriptionController extends AppBaseController
 {
     /** @var  PrescriptionRepository */
@@ -30,6 +30,10 @@ class PrescriptionController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $prescriptions = $this->prescriptionRepository->all();
         $patients = Patient::all();
         return view('prescriptions.index', compact('patients'))
@@ -43,6 +47,9 @@ class PrescriptionController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         return view('prescriptions.create');
     }
 
@@ -73,6 +80,10 @@ class PrescriptionController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $prescription = $this->prescriptionRepository->find($id);
         $patients = Patient::all();
         if (empty($prescription)) {
@@ -93,6 +104,10 @@ class PrescriptionController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $prescription = $this->prescriptionRepository->find($id);
         $patients = Patient::all();
         if (empty($prescription)) {
@@ -140,6 +155,9 @@ class PrescriptionController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $prescription = $this->prescriptionRepository->find($id);
 
         if (empty($prescription)) {

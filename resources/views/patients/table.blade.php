@@ -1,5 +1,5 @@
 <div>
-  @include('search')
+  @include('patients.search')
 </div>
 <div class="table-responsive">
     <table class="table" id="patients-table">
@@ -38,7 +38,9 @@
                     <div class='btn-group'>
                         <a href="{{ route('patients.show', [$patient->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                         <a href="{{ route('patients.edit', [$patient->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        @canany(['isAdmin'])
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        @endcan
                     </div>
                     {!! Form::close() !!}
                 </td>

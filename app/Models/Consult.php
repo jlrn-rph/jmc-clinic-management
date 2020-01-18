@@ -48,6 +48,7 @@ class Consult extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'patients_id' => 'string',
         'con_dateSxStart' => 'date',
         'con_height' => 'string',
         'con_weight' => 'string',
@@ -62,14 +63,15 @@ class Consult extends Model
      * @var array
      */
     public static $rules = [
+        'patients_id' => 'string',
         'con_dateSxStart' => 'required',
         'con_symptom' => 'required',
         'con_diagnosis' => 'required'
     ];
 
     public function patients(){
-        return $this->belongsTo(Patient::class);
+        return $this->belongsToMany(Patient::class, 'patients_id');
     }
-    
+
 
 }

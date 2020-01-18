@@ -25,7 +25,7 @@
   <select name="patients_id" id="patients_id" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
       <option value=""> Select Patient</option>
     @foreach($patients as $patient)
-      <option value="{{$patient->id}}"}}> {{$patient->px_name}}</option>
+      <option value="{{$patient->px_name}}"}}> {{$patient->px_name}}</option>
     @endforeach
   </select>
 </div>
@@ -39,25 +39,25 @@
 <!-- Pay Admission Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('pay_admission', 'Admission Cost:') !!}
-    {!! Form::text('pay_admission', null, ['class' => 'form-control']) !!}
+    {!! Form::text('pay_admission', null, ['class' => 'form-control price']) !!}
 </div>
 
 <!-- Pay Consultation Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('pay_consultation', 'Consultation Cost:') !!}
-    {!! Form::text('pay_consultation', null, ['class' => 'form-control']) !!}
+    {!! Form::text('pay_consultation', null, ['class' => 'form-control price']) !!}
 </div>
 
 <!-- Pay Lab Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('pay_lab', 'Lab Cost:') !!}
-    {!! Form::text('pay_lab', null, ['class' => 'form-control']) !!}
+    {!! Form::text('pay_lab', null, ['class' => 'form-control price']) !!}
 </div>
 
 <!-- Pay Others Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('pay_others', 'Others:') !!}
-    {!! Form::text('pay_others', null, ['class' => 'form-control']) !!}
+    {!! Form::text('pay_others', null, ['class' => 'form-control price']) !!}
 </div>
 
 <!-- Pay Subtotal Field -->
@@ -77,3 +77,21 @@
     {!! Form::label('pay_total', 'Total:') !!}
     {!! Form::text('pay_total', null, ['class' => 'form-control']) !!}
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+<script>
+$('.price').keyup(function () {
+    var sum = 0;
+    var vat = 0;
+    var sub = 0;
+    $('.price').each(function() {
+        sum += Number($(this).val());
+        vat = sum*.12;
+        sub = sum - vat;
+    });
+    $('#pay_total').val(sum);
+    $('#pay_subtotal').val(sub);
+    $('#pay_vat').val(vat);
+});
+</script>

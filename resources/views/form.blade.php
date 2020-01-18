@@ -14,7 +14,9 @@
             <div class="icon">
               <i class="fa fa-user-md"></i>
             </div>
+            @canany(['isAdmin', 'isDoctor', 'isStaff'])
             <a href="{{ route('doctors.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @endcan
           </div>
         </div>
         <!-- ./col -->
@@ -28,7 +30,9 @@
             <div class="icon">
               <i class="fa fa-wheelchair"></i>
             </div>
+            @canany(['isAdmin', 'isDoctor', 'isStaff'])
             <a href="{{ route('patients.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @endcan
           </div>
         </div>
         <!-- ./col -->
@@ -42,7 +46,9 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
+            @canany(['isAdmin', 'isDoctor', 'isStaff'])
             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @endcan
           </div>
         </div>
         <!-- ./col -->
@@ -56,7 +62,9 @@
             <div class="icon">
               <i class="fa fa-calendar-check-o"></i>
             </div>
+            @canany(['isAdmin', 'isDoctor', 'isStaff'])
             <a href="{{ route('appointments.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @endcan
           </div>
         </div>
         <!-- ./col -->

@@ -11,7 +11,7 @@ use Flash;
 use Response;
 use App\Specialist;
 use DB;
-
+use Gate;
 class DoctorController extends AppBaseController
 {
     /** @var  DoctorRepository */
@@ -31,6 +31,9 @@ class DoctorController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $doctors = $this->doctorRepository->paginate(15);
         $specialization = Specialist::all();
         return view('doctors.index', compact('specialization'))
@@ -44,6 +47,9 @@ class DoctorController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $specialization = Specialist::all();
         return view('doctors.create', compact('specialization'));
     }
@@ -75,6 +81,9 @@ class DoctorController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $doctor = $this->doctorRepository->find($id);
         $specialization = Specialist::all();
         if (empty($doctor)) {
@@ -95,6 +104,9 @@ class DoctorController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $doctor = $this->doctorRepository->find($id);
         $specialization = Specialist::all();
         if (empty($doctor)) {
@@ -158,6 +170,10 @@ class DoctorController extends AppBaseController
      */
     public function destroy($id)
     {
+
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $doctor = $this->doctorRepository->find($id);
 
         if (empty($doctor)) {

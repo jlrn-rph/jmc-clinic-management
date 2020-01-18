@@ -35,7 +35,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>Clinic Management System</b></a>
+        <a href="{{ url('/') }}"><b>Clinic Management System</b></a>
     </div>
 
     <!-- /.login-logo -->
@@ -96,13 +96,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/js/adminlte.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
-<script>
+<script text="text/javascript">
     $(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' // optional
         });
+    });
+
+    $(document).ready(function(){
+      var isAuth = "<?php echo Auth::check(); ?>";
+      if(location.href === 'http://127.0.0.1:8000/login/'){
+        if (isAuth) location.href('/patients');
+      }
+      else {
+        if(!isAuth) location.href('/login')
+      }
     });
 </script>
 </body>

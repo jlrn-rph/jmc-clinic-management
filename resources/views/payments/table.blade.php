@@ -21,7 +21,7 @@
             <tr>
                 <td>{{ $payment->pay_regNumber }}</td>
                 <td>{{ $payment->pay_regDate }}</td>
-                <td>{{ $payment->patients->px_name }}</td>
+                <td>{{ $payment->patients_id}}</td>
                 <!--<td>{{ $payment->pay_address }}</td>-->
                 <!--<td>{{ $payment->pay_admission }}</td>-->
                 <!--<td>{{ $payment->pay_consultation }}</td>-->
@@ -35,7 +35,9 @@
                     <div class='btn-group'>
                         <a href="{{ route('payments.show', [$payment->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                         <a href="{{ route('payments.edit', [$payment->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        @can('isAdmin')
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        @endcan
                     </div>
                     {!! Form::close() !!}
                 </td>

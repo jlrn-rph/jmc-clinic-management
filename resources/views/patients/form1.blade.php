@@ -1,7 +1,7 @@
 <!-- Px Regnumber Field -->
 <div class="form-group col-sm-4">
     {!! Form::label('px_regNumber', 'Patient Number:') !!}
-    {!! Form::text('px_regNumber', null, ['class' => 'form-control']) !!}
+    {!! Form::text('px_regNumber', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Px Regdate Field -->
@@ -83,7 +83,10 @@
 <!-- Px Status Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('px_status', 'Status:') !!}
-    {!! Form::number('px_status', null, ['class' => 'form-control', 'required']) !!}
+    <select class="form-control" name="px_status" id="px_status">
+      <option value="">Select Status</option>
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+    </select>
 </div>
-
 <!-- Select2 -->

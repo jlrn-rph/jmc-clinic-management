@@ -4,7 +4,7 @@
 
 <section class="content-header">
     <h1 class="pull-left">Doctors | Search Results</h1>
-    <h5 class="pull-right">@include('search')</h5>
+    <h5 class="pull-right">@include('doctors.search')</h5>
 </section>
 
 <div class="content">

@@ -7,7 +7,7 @@
 <!-- Ap Regdate Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('ap_regDate', 'Appointment Date:') !!}
-    {!! Form::date('ap_regDate', null, ['class' => 'form-control','id'=>'ap_regDate', 'required']) !!}
+    {!! Form::date('ap_regDate', $appointment->ap_regDate, ['class' => 'form-control','id'=>'ap_regDate', 'required']) !!}
 </div>
 
 @section('scripts')
@@ -46,5 +46,10 @@
 <!-- Ap Status Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('ap_status', 'Status:') !!}
-    {!! Form::text('ap_status', null, ['class' => 'form-control', 'required']) !!}
+    <select class="form-control" name="ap_status" id="ap_status">
+      <option value="">Select Status</option>
+      <option value="pending"{{ 'pending'== $appointment->ap_status ? 'selected' : ''}}>pending</option>
+      <option value="on-going"{{ 'on-going'== $appointment->ap_status ? 'selected' : ''}}>on-going</option>
+      <option value="done"{{ 'done'== $appointment->ap_status ? 'selected' : ''}}>done</option>
+    </select>
 </div>

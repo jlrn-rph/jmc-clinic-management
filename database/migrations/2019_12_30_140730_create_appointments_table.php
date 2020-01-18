@@ -21,7 +21,7 @@ class CreateAppointmentsTable extends Migration
           $table->string('ap_doctor')->nullable();
           $table->string('ap_specialist')->nullable();
           $table->longText('ap_reason');
-          $table->string('ap_status')->default(1);
+          $table->string('ap_status')->default('pending');
           $table->softDeletes();
           $table->timestamps();
         });

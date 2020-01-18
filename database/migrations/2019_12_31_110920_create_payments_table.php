@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
           $table->bigIncrements('id');
           $table->string('pay_regNumber');
           $table->date('pay_regDate');
-          $table->unsignedBigInteger('patients_id');
+          $table->string('patients_id');
           $table->longText('pay_address')->nullable();
           $table->string('pay_admission')->nullable();
           $table->string('pay_consultation')->nullable();

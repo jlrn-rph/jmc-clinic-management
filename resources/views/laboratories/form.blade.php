@@ -72,7 +72,11 @@
 <!-- Lab Doctor Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_doctor', 'Requesting Physician:') !!}
-    {!! Form::text('lab_doctor', null, ['class' => 'form-control', 'required']) !!}
+    <select name="lab_doctor" id="lab_doctor" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Doctor" title="Select Doctor">
+      @foreach($doctors as $doctor)
+          <option value="{{$doctor->dr_name}}" {{ $doctor->dr_name ==  $laboratory->lab_doctor ? 'selected' : '' }}> {{$doctor->dr_name}}</option>
+      @endforeach
+    </select>
 </div>
 
 <!-- Lab Test Field -->
@@ -88,5 +92,10 @@
 <!-- Lab Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_status', 'Status:') !!}
-    {!! Form::number('lab_status', null, ['class' => 'form-control', 'required']) !!}
+    <select class="form-control" name="lab_status" id="lab_status">
+      <option value="">Select Status</option>
+      <option value="pending"{{ 'pending'== $laboratory->lab_status ? 'selected' : ''}}>pending</option>
+      <option value="on-process"{{ 'on-process'== $laboratory->lab_status ? 'selected' : ''}}>on-going</option>
+      <option value="done"{{ 'done'== $laboratory->lab_status ? 'selected' : ''}}>done</option>
+    </select>
 </div>

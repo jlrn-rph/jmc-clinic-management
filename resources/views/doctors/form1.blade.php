@@ -50,7 +50,7 @@
 <!-- Dr Gender Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_gender', 'Gender:') !!}
-    {!! Form::text('dr_gender', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::select('dr_gender', ['Male' => 'Male', 'Female' => 'Female'], ['class' => 'form-control', 'required'], ['placeholder' => 'Select Sex']) !!}
 </div>
 
 <!-- Dr Dob Field -->
@@ -108,10 +108,24 @@
 <div class="form-group col-sm-12">
     {!! Form::label('dr_daysAvail', 'Available Days:') !!}
     {!! Form::text('dr_daysAvail', null, ['class' => 'form-control', 'required']) !!}
+    <!-- <select class="form-control" name="dr_daysAvail" id="dr_daysAvail">
+      <option value="">Select Days</option>
+      <option value="Sunday">Sunday</option>
+      <option value="Monday">Monday</option>
+      <option value="Tuesday">Tuesday</option>
+      <option value="Wednesday">Wednesday</option>
+      <option value="Thursday">Thursday</option>
+      <option value="Friday">Friday</option>
+      <option value="Saturday">Saturday</option>
+    </select> -->
 </div>
 
 <!-- Dr Status Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_status', 'Status:') !!}
-    {!! Form::number('dr_status', null, ['class' => 'form-control', 'required']) !!}
+    <select class="form-control" name="dr_status" id="dr_status">
+      <option value="">Select Status</option>
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+    </select>
 </div>

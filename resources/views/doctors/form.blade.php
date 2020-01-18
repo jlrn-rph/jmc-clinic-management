@@ -50,13 +50,13 @@
 <!-- Dr Gender Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_gender', 'Gender:') !!}
-    {!! Form::text('dr_gender', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::select('dr_gender', ['Male' => 'Male', 'Female' => 'Female'],$doctor->dr_gender, ['class' => 'form-control', 'required'], ['placeholder' => 'Select Sex']) !!}
 </div>
 
 <!-- Dr Dob Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_dob', 'Date of Birth:') !!}
-    {!! Form::date('dr_dob', null, ['class' => 'form-control','id'=>'dr_dob', 'required']) !!}
+    {!! Form::date('dr_dob', $doctor->dr_dob, ['class' => 'form-control','id'=>'dr_dob', 'required']) !!}
 </div>
 
 @section('scripts')
@@ -113,5 +113,9 @@
 <!-- Dr Status Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_status', 'Status:') !!}
-    {!! Form::number('dr_status', null, ['class' => 'form-control', 'required']) !!}
+    <select class="form-control" name="dr_status" id="dr_status">
+      <option value="">Select Status</option>
+      <option value="Active"{{ 'Active' == $doctor->dr_status ? 'selected' : ''}}>Active</option>
+      <option value="Inactive"{{ 'inactive' == $doctor->dr_status ? 'selected' : ''}}>Inactive</option>
+    </select>
 </div>

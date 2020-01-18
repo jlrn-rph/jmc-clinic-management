@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Patient;
-
+use Gate;
 
 class PaymentController extends AppBaseController
 {
@@ -31,6 +31,9 @@ class PaymentController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $payments = $this->paymentRepository->all();
         $patients = Patient::all();
         return view('payments.index', compact('patients'))
@@ -44,6 +47,9 @@ class PaymentController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $patients = Patient::all();
         return view('payments.create', compact('patients'));
     }
@@ -75,6 +81,9 @@ class PaymentController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $payment = $this->paymentRepository->find($id);
         $patients = Patient::all();
         if (empty($payment)) {
@@ -95,6 +104,9 @@ class PaymentController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $payment = $this->paymentRepository->find($id);
         $patients = Patient::all();
         if (empty($payment)) {
@@ -142,6 +154,9 @@ class PaymentController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $payment = $this->paymentRepository->find($id);
 
         if (empty($payment)) {

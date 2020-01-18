@@ -1,7 +1,7 @@
 <div class="form-group col-sm-12">
   <label for="patients_id">Patient Name: </label>
   <select name="patients_id" id="patients_id" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
-    @foreach($patients as $patient)
+    @foreach($patient as $patient)
       <option value="{{$patient->id}}"> {{$patient->px_name}}</option>
     @endforeach
   </select>

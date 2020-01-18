@@ -9,7 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
-
+use Gate;
 class SpecialistController extends AppBaseController
 {
     /** @var  SpecialistRepository */
@@ -29,6 +29,9 @@ class SpecialistController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $specialists = $this->specialistRepository->all();
 
         return view('specialists.index')
@@ -42,6 +45,9 @@ class SpecialistController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         return view('specialists.create');
     }
 
@@ -72,6 +78,9 @@ class SpecialistController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $specialist = $this->specialistRepository->find($id);
 
         if (empty($specialist)) {
@@ -92,6 +101,9 @@ class SpecialistController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $specialist = $this->specialistRepository->find($id);
 
         if (empty($specialist)) {
@@ -139,6 +151,9 @@ class SpecialistController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $specialist = $this->specialistRepository->find($id);
 
         if (empty($specialist)) {

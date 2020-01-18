@@ -25,7 +25,7 @@ class CreateLaboratoriesTable extends Migration
             $table->string('lab_email')->unique();
             $table->string('lab_doctor');
             $table->string('lab_test');
-            $table->integer('lab_status')->default(1);
+            $table->string('lab_status')->default('pending');
             $table->softDeletes();
             $table->timestamps();
         });

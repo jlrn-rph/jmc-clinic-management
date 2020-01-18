@@ -9,7 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
-
+use Gate;
 class ReturnPurchaseController extends AppBaseController
 {
     /** @var  ReturnPurchaseRepository */
@@ -29,6 +29,9 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $returnPurchases = $this->returnPurchaseRepository->all();
 
         return view('return_purchases.index')
@@ -42,6 +45,9 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         return view('return_purchases.create');
     }
 
@@ -72,6 +78,9 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $returnPurchase = $this->returnPurchaseRepository->find($id);
 
         if (empty($returnPurchase)) {
@@ -92,6 +101,9 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $returnPurchase = $this->returnPurchaseRepository->find($id);
 
         if (empty($returnPurchase)) {
@@ -139,6 +151,9 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $returnPurchase = $this->returnPurchaseRepository->find($id);
 
         if (empty($returnPurchase)) {

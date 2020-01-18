@@ -15,7 +15,8 @@ class CreateConsultsTable extends Migration
     {
         Schema::create('consults', function (Blueprint $table) {
           $table->bigIncrements('id');
-          $table->string('patients_id');
+          $table->string('patients_name');
+          $table->string('doctor_name');
           $table->date('con_dateSxStart');
           $table->string('con_height')->nullable();
           $table->string('con_weight')->nullable();

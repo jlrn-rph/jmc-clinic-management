@@ -1,5 +1,5 @@
 <div>
-  @include('search')
+  @include('doctors.search')
 </div>
 <div class="table-responsive">
     <table class="table" id="doctors-table">

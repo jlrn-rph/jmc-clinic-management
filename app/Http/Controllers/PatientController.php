@@ -10,10 +10,11 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Doctor;
+use App\Consult;
 use Flash;
 use Response;
 use DB;
-
+use Gate;
 
 class PatientController extends AppBaseController
 {
@@ -34,6 +35,9 @@ class PatientController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isPatient') && !Gate::allows('isStaff') ){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $doctors = Doctor::all();
         $patient = $this->patientRepository->paginate(15);
         return view('patients.index', compact('doctors'))
@@ -47,6 +51,9 @@ class PatientController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isPatient') && !Gate::allows('isStaff') ){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $doctors = Doctor::all();
         return view('patients.create', compact('doctors'));
     }
@@ -79,7 +86,11 @@ class PatientController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isPatient') && !Gate::allows('isStaff') ){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $patient = $this->patientRepository->find($id);
+        $consults = Consult::all();
         $doctors = Doctor::all();
         if (empty($patient)) {
             Flash::error('Patient not found');
@@ -87,7 +98,7 @@ class PatientController extends AppBaseController
             return redirect(route('patients.index'));
         }
 
-        return view('patients.show', compact('doctors'))->with('patient', $patient);
+        return view('patients.show', compact('doctors', 'consults'))->with('patient', $patient);
     }
 
     /**
@@ -99,6 +110,10 @@ class PatientController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isPatient') && !Gate::allows('isStaff') ){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $patient = $this->patientRepository->find($id);
         $doctors = Doctor::all();
         if (empty($patient)) {
@@ -137,7 +152,7 @@ class PatientController extends AppBaseController
 
     public function search(Request $request)
     {
-      $patients = $this->patientRepository->all();
+      // $patients = $this->patientRepository->all();
       $request->validate([
         'query'=>'required|min:3',
       ]);
@@ -163,6 +178,12 @@ class PatientController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorized to do this");
+        }
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $patient = $this->patientRepository->find($id);
 
         if (empty($patient)) {

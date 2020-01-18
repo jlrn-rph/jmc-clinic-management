@@ -11,7 +11,7 @@ use Flash;
 use Response;
 use App\Patient;
 use App\Consult;
-
+use Gate;
 class ConsultController extends AppBaseController
 {
     /** @var  ConsultRepository */
@@ -31,9 +31,12 @@ class ConsultController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $consults = $this->consultRepository->all();
-        $patients = Patient::all();
-        return view('consults.index', compact('patients'))
+        $patient = Patient::all();
+        return view('consults.index', compact('patient'))
             ->with('consults', $consults);
     }
 
@@ -45,6 +48,9 @@ class ConsultController extends AppBaseController
        */
     public function create()
     {
+      if(!Gate::allows('isAdmin')){
+        abort(404, "Sorry, you're not authorize to do this");
+      }
          $consult = Consult::all();
         return view('consults.create');
     }
@@ -55,7 +61,7 @@ class ConsultController extends AppBaseController
      * @param CreateConsultRequest $request
      *
      *
-      @return Response
+      *@return Response
      */
     public function store(CreateConsultRequest $request)
     {
@@ -75,8 +81,11 @@ class ConsultController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $consult = $this->consultRepository->find($id);
-        
+
         if (empty($consult)) {
             Flash::error('Consult not found');
 
@@ -95,15 +104,18 @@ class ConsultController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $consult = $this->consultRepository->find($id);
-        $patients = Patient::all();
+        $patient = Patient::all();
         if (empty($consult)) {
             Flash::error('Consult not found');
 
             return redirect(route('consults.index'));
         }
 
-        return view('consults.edit', compact('patients'))->with('consult', $consult);
+        return view('consults.edit', compact('patient'))->with('consult', $consult);
     }
 
     /**
@@ -142,6 +154,9 @@ class ConsultController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $consult = $this->consultRepository->find($id);
 
         if (empty($consult)) {

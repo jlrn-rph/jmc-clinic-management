@@ -9,6 +9,8 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Gate;
+use App\Helpers;
 
 class AppointmentController extends AppBaseController
 {
@@ -29,6 +31,9 @@ class AppointmentController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isPatient') && !Gate::allows('isStaff') ){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $appointments = $this->appointmentRepository->all();
 
         return view('appointments.index')
@@ -42,6 +47,9 @@ class AppointmentController extends AppBaseController
      */
     public function create()
     {
+      if(!Gate::allows('isAdmin') && !Gate::allows('isPatient') && !Gate::allows('isStaff') ){
+        abort(404, "Sorry, you're not authorize to do this");
+      }
         return view('appointments.create');
     }
 
@@ -72,6 +80,9 @@ class AppointmentController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isPatient') && !Gate::allows('isStaff') ){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $appointment = $this->appointmentRepository->find($id);
 
         if (empty($appointment)) {
@@ -92,6 +103,10 @@ class AppointmentController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff') ){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $appointment = $this->appointmentRepository->find($id);
 
         if (empty($appointment)) {
@@ -138,7 +153,10 @@ class AppointmentController extends AppBaseController
      * @return Response
      */
     public function destroy($id)
-    {
+{
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $appointment = $this->appointmentRepository->find($id);
 
         if (empty($appointment)) {
@@ -153,4 +171,5 @@ class AppointmentController extends AppBaseController
 
         return redirect(route('appointments.index'));
     }
+
 }

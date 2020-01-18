@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-<iframe src="http://localhost/easyappointments/index.php/backend"></iframe>
-
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">Appointments</h1>

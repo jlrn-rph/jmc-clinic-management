@@ -15,7 +15,7 @@
         @foreach($users as $user)
                   <tr>
                   <td>{{ $user->name }}</td>
-                  <td>{{ $user->role->role_name}}</td>
+                  <td>{{ $user->role_id}}</td>
                   <td>{{ $user->email }}</td>
                 <!--<td>{{ $user->email_verified_at }}</td>-->
                 <!--<td>{{ $user->password }}</td>-->

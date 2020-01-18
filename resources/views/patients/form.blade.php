@@ -83,5 +83,9 @@
 <!-- Px Status Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('px_status', 'Status:') !!}
-    {!! Form::number('px_status', null, ['class' => 'form-control', 'required']) !!}
+    <select class="form-control" name="px_status" id="px_status">
+      <option value="">Select Status</option>
+      <option value="Active"{{ 'Active' == $patient->px_status ? 'selected' : ''}}>Active</option>
+      <option value="Inactive"{{ 'Inactive' == $patient->px_status ? 'selected' : ''}}>Inactive</option>
+    </select>
 </div>
