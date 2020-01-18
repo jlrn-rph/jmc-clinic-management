@@ -9,6 +9,9 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use DB;
+use PDF;
+use App\Item;
 
 class ItemController extends AppBaseController
 {
@@ -29,7 +32,7 @@ class ItemController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $items = $this->itemRepository->all();
+        $items = $this->itemRepository->paginate(15);
 
         return view('items.index')
             ->with('items', $items);
@@ -126,6 +129,26 @@ class ItemController extends AppBaseController
         Flash::success('Item updated successfully.');
 
         return redirect(route('items.index'));
+    }
+
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $items = DB::table('items')->where('it_name','like',"%$query%")
+                        ->paginate(15);
+
+      return view('items.search-results')->with('items', $items);
+    }
+
+    public function pdf_list(){
+      $items = Item::all();
+      $pdf = PDF::loadView('items.pdf1', compact('items'));
+      return $pdf->download('item_list.pdf');
     }
 
     /**

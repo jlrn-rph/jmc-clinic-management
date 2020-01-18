@@ -9,6 +9,12 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Gate;
+use App\Helpers;
+use DB;
+use PDF;
+use App\Appointment;
+
 
 class AppointmentController extends AppBaseController
 {
@@ -29,7 +35,7 @@ class AppointmentController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $appointments = $this->appointmentRepository->all();
+        $appointments = $this->appointmentRepository->paginate(15);
 
         return view('appointments.index')
             ->with('appointments', $appointments);
@@ -42,6 +48,7 @@ class AppointmentController extends AppBaseController
      */
     public function create()
     {
+
         return view('appointments.create');
     }
 
@@ -80,7 +87,7 @@ class AppointmentController extends AppBaseController
             return redirect(route('appointments.index'));
         }
 
-        return view('appointments.show')->with('appointment', $appointment);
+        return view('appointments.show')->with('appointment', $appointment)->paginate();
     }
 
     /**
@@ -128,6 +135,28 @@ class AppointmentController extends AppBaseController
         return redirect(route('appointments.index'));
     }
 
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $appointments = DB::table('appointments')->where('ap_pxName','like',"%$query%")
+                        ->orWhere('ap_doctor','like',"%$query%")
+                        ->paginate(15);
+
+      return view('appointments.search-results')->with('appointments', $appointments);
+    }
+
+    public function pdf_list(){
+      $appointments = Appointment::all();
+      $pdf = PDF::loadView('appointments.pdf1', compact('appointments'));
+      return $pdf->download('appointment_list.pdf');
+    }
+
+
     /**
      * Remove the specified Appointment from storage.
      *
@@ -153,4 +182,5 @@ class AppointmentController extends AppBaseController
 
         return redirect(route('appointments.index'));
     }
+
 }

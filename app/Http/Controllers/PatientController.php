@@ -10,9 +10,11 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Doctor;
+use App\Consult;
 use Flash;
 use Response;
 use DB;
+use PDF;
 
 
 class PatientController extends AppBaseController
@@ -35,9 +37,9 @@ class PatientController extends AppBaseController
     public function index(Request $request)
     {
         $doctors = Doctor::all();
-        $patient = $this->patientRepository->paginate(15);
+        $patients = $this->patientRepository->paginate(15);
         return view('patients.index', compact('doctors'))
-            ->with('patient', $patient);
+            ->with('patients', $patients);
     }
 
     /**
@@ -79,7 +81,8 @@ class PatientController extends AppBaseController
      */
     public function show($id)
     {
-        $patient = $this->patientRepository->find($id);
+        $patients = $this->patientRepository->find($id);
+        $consults = Consult::all();
         $doctors = Doctor::all();
         if (empty($patient)) {
             Flash::error('Patient not found');
@@ -87,7 +90,7 @@ class PatientController extends AppBaseController
             return redirect(route('patients.index'));
         }
 
-        return view('patients.show', compact('doctors'))->with('patient', $patient);
+        return view('patients.show', compact('doctors', 'consults'))->with('patients', $patients);
     }
 
     /**
@@ -137,7 +140,6 @@ class PatientController extends AppBaseController
 
     public function search(Request $request)
     {
-      $patients = $this->patientRepository->all();
       $request->validate([
         'query'=>'required|min:3',
       ]);
@@ -150,6 +152,18 @@ class PatientController extends AppBaseController
                         ->paginate(15);
 
       return view('patients.search-results')->with('patients', $patients);
+    }
+
+    public function pdf($id){
+      $patients = Patient::find($id);
+      $pdf = PDF::loadView('patients.pdf', compact('patients'));
+      return $pdf->download('patients.pdf');
+    }
+
+    public function pdf_list(){
+      $patients = Patient::all();
+      $pdf = PDF::loadView('patients.pdf1', compact('patients'));
+      return $pdf->download('patient_list.pdf');
     }
 
     /**

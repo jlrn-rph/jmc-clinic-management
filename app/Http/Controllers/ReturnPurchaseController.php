@@ -9,6 +9,9 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use DB;
+use PDF;
+use App\ReturnPurchase;
 
 class ReturnPurchaseController extends AppBaseController
 {
@@ -29,7 +32,7 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $returnPurchases = $this->returnPurchaseRepository->all();
+        $returnPurchases = $this->returnPurchaseRepository->paginate(15);
 
         return view('return_purchases.index')
             ->with('returnPurchases', $returnPurchases);
@@ -126,6 +129,26 @@ class ReturnPurchaseController extends AppBaseController
         Flash::success('Return Purchase updated successfully.');
 
         return redirect(route('returnPurchases.index'));
+    }
+
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $returnPurchases = DB::table('return_purchases')->where('ret_item','like',"%$query%")
+                        ->paginate(15);
+
+      return view('return_purchases.search-results')->with('returnPurchases', $returnPurchases);
+    }
+
+    public function pdf_list(){
+      $returnPurchases = returnPurchase::all();
+      $pdf = PDF::loadView('return_purchases.pdf1', compact('returnPurchases'));
+      return $pdf->download('return_purchase_list.pdf');
     }
 
     /**

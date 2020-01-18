@@ -11,6 +11,8 @@ use Flash;
 use Response;
 use App\Specialist;
 use DB;
+use PDF;
+use App\Doctor;
 
 class DoctorController extends AppBaseController
 {
@@ -145,6 +147,18 @@ class DoctorController extends AppBaseController
                         ->paginate(15);
 
       return view('doctors.search-results')->with('doctors', $doctors);
+    }
+
+    public function pdf($id){
+      $doctors = Doctor::find($id);
+      $pdf = PDF::loadView('doctors.pdf', compact('doctors'));
+      return $pdf->download('doctors.pdf');
+    }
+
+    public function pdf_list(){
+      $doctors = Doctor::all();
+      $pdf = PDF::loadView('doctors.pdf1', compact('doctors'));
+      return $pdf->download('doctor_list.pdf');
     }
 
     /**

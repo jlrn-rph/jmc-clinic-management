@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Cookie;
+use Redirect;
+use DB;
+use App\Doctor;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      return response (view('home'))->cookie('home_cookie', 'home', 2);
+
     }
 }

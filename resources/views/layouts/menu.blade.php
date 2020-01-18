@@ -90,9 +90,13 @@
   </ul>
 </li>
 
-<li class="{{ Request::is('schedules*') ? 'active' : '' }}">
-    <a href="{{ route('schedules.index') }}"><i class="fa fa-edit"></i><span>Schedules</span></a>
+<li class="{{ Request::is('staff*') ? 'active' : '' }}">
+    <a href="{{ route('staff.index') }}"><i class="fa fa-users"></i><span>Staff</span></a>
 </li>
+
+<!-- <li class="{{ Request::is('schedules*') ? 'active' : '' }}">
+    <a href="{{ route('schedules.index') }}"><i class="fa fa-edit"></i><span>Schedules</span></a>
+</li> -->
 
 <li class="treeview">
 <a href="#">
@@ -137,7 +141,7 @@
     </li>
   </ul>
 </li>
-
+@canany(['isAdmin','isPatient'])
 <li class="treeview">
 <a href="#">
   <i class="fa fa-users"></i> <span>Users</span>
@@ -154,4 +158,4 @@
     </li>
   </ul>
 </li>
-
+@endcan

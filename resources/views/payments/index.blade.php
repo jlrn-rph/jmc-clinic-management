@@ -4,7 +4,8 @@
     <section class="content-header">
         <h1 class="pull-left">Payments</h1>
         <h1 class="pull-right">
-           <a data-toggle="modal" data-target="#add-new-payment" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px"><i class="fa fa-plus-circle"></i> Add Payment</a>
+           <a data-toggle="modal" data-target="#add-new-payment" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px"><i class="fa fa-plus-circle"></i> New Payment</a>
+          
         </h1>
     </section>
     <div class="content">
@@ -23,8 +24,8 @@
                     {!! Form::close() !!}
             </div>
         </div>
-        <div class="text-center">
-
+        <div class="pagination navigation">
+          {{ $payments->links() }}
         </div>
     </div>
 @endsection

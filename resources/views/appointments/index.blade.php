@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
-<iframe src="http://localhost/easyappointments/index.php/backend"></iframe>
-
 @section('content')
     <section class="content-header">
         <h1 class="pull-left">Appointments</h1>
         <h1 class="pull-right">
            <a data-toggle="modal" data-target="#add-new-appointment" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px"><i class="fa fa-plus-circle"></i> New Appointment</a>
+           <a href="{{ route('ap_pdf') }}" class="btn btn-danger pull-right" style="margin-top: -10px;margin-bottom: 5px"></i>Convert to PDF</a>
         </h1>
     </section>
     <div class="content">
@@ -25,8 +24,8 @@
                     {!! Form::close() !!}
             </div>
         </div>
-        <div class="text-center">
-
+        <div class="pagination navigation">
+          {{ $appointments->links() }}
         </div>
     </div>
 @endsection

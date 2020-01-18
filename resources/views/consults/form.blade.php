@@ -1,8 +1,8 @@
 <div class="form-group col-sm-12">
   <label for="patients_id">Patient Name: </label>
-  <select name="patients_id" id="patients_id" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
+  <select name="patients_id" id="patients_id" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient" disabled>
     @foreach($patient as $patient)
-      <option value="{{$patient->id}}"{{ $patient->id == $consult->patients_id ? 'selected' :'' }}> {{$patient->px_name}}</option>
+      <option value="{{$patient->px_name}}"{{ $patient->px_name == $consult->patients_id ? 'selected' :'' }}> {{$patient->px_name}}</option>
     @endforeach
   </select>
 </div>

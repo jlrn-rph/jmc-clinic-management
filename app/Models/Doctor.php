@@ -32,7 +32,7 @@ class Doctor extends Model
     use SoftDeletes;
 
     public $table = 'doctors';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -103,11 +103,11 @@ class Doctor extends Model
         'dr_timeIn' => 'required',
         'dr_timeOut' => 'required',
         'dr_daysAvail' => 'required',
-        'dr_status' => 'required'
+        'dr_status' => 'required',
     ];
 
     public function patients(){
       return $this->hasMany(Patient::class);
     }
-    
+
 }

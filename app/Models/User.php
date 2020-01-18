@@ -48,7 +48,7 @@ class User extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
-        'role_id' => 'string',
+        'role_id' => 'integer',
         'email' => 'string',
         'email_verified_at' => 'datetime',
         'password' => 'string',

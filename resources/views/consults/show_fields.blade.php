@@ -1,6 +1,6 @@
 <div class="form-group">
     {!! Form::label('patients_id', 'Patient Name') !!}
-    <p>{{ $consult->patients->px_name }}</p>
+    <p>{{ $consult->patients_id }}</p>
 </div>
 
 <!-- Con Datesxstart Field -->

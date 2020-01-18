@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Patient;
-
+use DB;
+use PDF;
+use App\Payment;
 
 class PaymentController extends AppBaseController
 {
@@ -31,8 +33,9 @@ class PaymentController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $payments = $this->paymentRepository->all();
+        $payments = $this->paymentRepository->paginate(15);
         $patients = Patient::all();
+
         return view('payments.index', compact('patients'))
             ->with('payments', $payments);
     }
@@ -59,7 +62,7 @@ class PaymentController extends AppBaseController
     {
         $input = $request->all();
 
-        $payment = $this->paymentRepository->create($input);
+        $payments = $this->paymentRepository->create($input);
 
         Flash::success('Payment saved successfully.');
 
@@ -130,6 +133,20 @@ class PaymentController extends AppBaseController
 
         return redirect(route('payments.index'));
     }
+
+    // public function pdf($id){
+    //
+    //   $payments = Payment::where([['id', $id]])->get();
+    //   $pdf = PDF::loadView('payments.pdf', compact('payments',$payments));
+    //   return $pdf->download('payments.pdf');
+    // }
+    //
+    // public function pdf_list(){
+    //   $patients = Patient::all();
+    //   $payments = Payment::all();
+    //   $pdf = PDF::loadView('payments.pdf1', compact('payments', 'patients'));
+    //   return $pdf->download('payment_list.pdf');
+    // }
 
     /**
      * Remove the specified Payment from storage.

@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Role;
+use DB;
+use PDF;
+use App\User;
 
 class UserController extends AppBaseController
 {
@@ -129,6 +132,26 @@ class UserController extends AppBaseController
         Flash::success('User updated successfully.');
 
         return redirect(route('users.index'));
+    }
+
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $users = DB::table('users')->where('name','like',"%$query%")
+                        ->paginate(15);
+
+      return view('users.search-results')->with('users', $users);
+    }
+
+    public function pdf_list(){
+      $users = User::all();
+      $pdf = PDF::loadView('users.pdf1', compact('users'));
+      return $pdf->download('user_list.pdf');
     }
 
     /**

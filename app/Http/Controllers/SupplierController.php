@@ -9,6 +9,9 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use DB;
+use PDF;
+use App\Supplier;
 
 class SupplierController extends AppBaseController
 {
@@ -29,7 +32,7 @@ class SupplierController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $suppliers = $this->supplierRepository->all();
+        $suppliers = $this->supplierRepository->paginate(15);
 
         return view('suppliers.index')
             ->with('suppliers', $suppliers);
@@ -126,6 +129,26 @@ class SupplierController extends AppBaseController
         Flash::success('Supplier updated successfully.');
 
         return redirect(route('suppliers.index'));
+    }
+
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $suppliers = DB::table('suppliers')->where('sup_name','like',"%$query%")
+                        ->paginate(15);
+
+      return view('suppliers.search-results')->with('suppliers', $suppliers);
+    }
+
+    public function pdf_list(){
+      $suppliers = Supplier::all();
+      $pdf = PDF::loadView('suppliers.pdf1', compact('suppliers'));
+      return $pdf->download('supplier_list.pdf');
     }
 
     /**

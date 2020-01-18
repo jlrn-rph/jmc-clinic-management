@@ -9,6 +9,9 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use DB;
+use PDF;
+use App\Purchase;
 
 class PurchaseController extends AppBaseController
 {
@@ -29,7 +32,7 @@ class PurchaseController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $purchases = $this->purchaseRepository->all();
+        $purchases = $this->purchaseRepository->paginate(15);
 
         return view('purchases.index')
             ->with('purchases', $purchases);
@@ -126,6 +129,26 @@ class PurchaseController extends AppBaseController
         Flash::success('Purchase updated successfully.');
 
         return redirect(route('purchases.index'));
+    }
+
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $purchases = DB::table('purchases')->where('pur_item','like',"%$query%")
+                        ->paginate(15);
+
+      return view('purchases.search-results')->with('purchases', $purchases);
+    }
+
+    public function pdf_list(){
+      $purchases = Purchase::all();
+      $pdf = PDF::loadView('purchases.pdf1', compact('purchases'));
+      return $pdf->download('purchase_list.pdf');
     }
 
     /**

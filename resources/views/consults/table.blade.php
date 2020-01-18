@@ -16,12 +16,12 @@
         @foreach($consults as $consults)
             <tr>
             <td>{{ $consults->con_dateSxStart }}</td>
-            <td>{{ $consults->patients->px_name }}</td>
+            <td>{{ $consults->patients_id }}</td>
             <td>{{ $consults->con_height }}</td>
             <td>{{ $consults->con_weight }}</td>
             <td>{{ $consults->con_bp }}</td>
-            <td>{{ $consults->con_symptom }}</td>
-            <td>{{ $consults->con_diagnosis }}</td>
+            <td>{{ str_limit($consults->con_symptom, 30) }}</td>
+            <td>{{ str_limit($consults->con_diagnosis, 30) }}</td>
                 <td>
                     {!! Form::open(['route' => ['consults.destroy', $consults->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

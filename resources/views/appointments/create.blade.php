@@ -2,9 +2,8 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Appointment
-        </h1>
+        <h1>Appointment</h1>
+         <a href="{{ route('ap_pdf') }}" class="btn btn-danger pull-right" style="margin-top: -10px;margin-bottom: 5px"></i>Convert to PDF</a>
     </section>
     <div class="content">
         @include('adminlte-templates::common.errors')

@@ -1,11 +1,11 @@
 <!-- Px Regnumber Field -->
-<div class="form-group col-sm-4">
+<div class="form-group col-sm-6">
     {!! Form::label('px_regNumber', 'Patient Number:') !!}
     {!! Form::text('px_regNumber', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Px Regdate Field -->
-<div class="form-group col-sm-4">
+<div class="form-group col-sm-6">
     {!! Form::label('px_regDate', 'Registered Date:') !!}
     {!! Form::date('px_regDate', $patient->px_regDate, ['class' => 'form-control','id'=>'px_regDate', 'required']) !!}
 </div>
@@ -14,16 +14,16 @@
     <script type="text/javascript">
         $('#px_regDate').datetimepicker({
           format: 'YYYY-MM-DD',
-          minDate: Date()
+          minDate: 0
         })
     </script>
 @endsection
 
-<!-- Px Image Field -->
+<!-- Px Image Field
 <div class="form-group col-sm-4">
     {!! Form::label('px_image', 'Upload Image:') !!}
     {!! Form::file('px_image', null, ['class' => 'form-control']) !!}
-</div>
+</div> -->
 
 <!-- Px Name Field -->
 <div class="form-group col-sm-12">
@@ -46,8 +46,7 @@
 @section('scripts')
     <script type="text/javascript">
         $('#px_dob').datetimepicker({
-            format: 'YYYY-MM-DD',
-            useCurrent: false
+            minDate: 0
         })
     </script>
 @endsection
@@ -61,7 +60,7 @@
 <!-- Px Contact Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('px_contact', 'Contact Number:') !!}
-    {!! Form::text('px_contact', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::text('px_contact', null, ['class' => 'form-control', 'pattern'=> '[0-9]{6,13}', 'required']) !!}
 </div>
 
 <!-- Px Email Field -->

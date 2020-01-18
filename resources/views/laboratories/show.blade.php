@@ -2,8 +2,9 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Laboratory
+        <h1>Laboratory</h1>
+        <h1 class="pull-right">
+          <a href="{{ url('laboratories/pdf/' . $laboratory->id) }}" style="margin-top: -50px;margin-bottom: 5px" class="btn btn-danger">Convert to PDF</a>
         </h1>
     </section>
     <div class="content">

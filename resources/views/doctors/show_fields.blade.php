@@ -1,8 +1,8 @@
 <div class="media col-sm-12">
     <div class="media-left">
-         <a href="#" class="profile-thumb">
-            <img src="https://via.placeholder.com/150" class="img-circle" alt="">
-        </a>
+         <!-- <a href="#" class="profile-thumb">
+            <img src="{{ $doctor->dr_image }}" class="img-circle" alt="">
+        </a> -->
     </div>
 
      <div class="media-body">
@@ -35,7 +35,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">Personal Details</div>
       <div class="panel-body">
-        <div class="form-group">
+        <div class="form-group col-sm-12">
           <!-- Dr Specialist Field -->
             {!! Form::label('dr_specialist', 'Specialization:') !!}
             {{ $doctor->dr_specialist }}

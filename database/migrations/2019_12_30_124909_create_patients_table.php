@@ -25,7 +25,7 @@ class CreatePatientsTable extends Migration
           $table->string('px_contact');
           $table->string('px_email')->unique();
           $table->string('px_doctor');
-          $table->integer('px_status')->default(1);
+          $table->string('px_status')->default('active');
           $table->softDeletes();
           $table->timestamps();
         });

@@ -11,6 +11,10 @@ use Flash;
 use Response;
 use App\Patient;
 use App\labTest;
+use DB;
+use PDF;
+use App\Laboratory;
+
 class LaboratoryController extends AppBaseController
 {
     /** @var  LaboratoryRepository */
@@ -30,7 +34,7 @@ class LaboratoryController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $laboratories = $this->laboratoryRepository->all();
+        $laboratories = $this->laboratoryRepository->paginate(15);
         $patients = Patient::all();
         $labtests = LabTest::all();
         return view('laboratories.index', compact('patients', 'labtests'))
@@ -133,6 +137,34 @@ class LaboratoryController extends AppBaseController
         Flash::success('Laboratory updated successfully.');
 
         return redirect(route('laboratories.index'));
+    }
+
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $laboratories = DB::table('laboratories')->where('lab_name','like',"%$query%")
+                        ->orWhere('lab_doctor','like',"%$query%")
+                        ->orWhere('lab_test','like',"%$query%")
+                        ->paginate(15);
+
+      return view('laboratories.search-results')->with('laboratories', $laboratories);
+    }
+
+    public function pdf($id){
+      $laboratory = Laboratory::find($id);
+      $pdf = PDF::loadView('laboratories.pdf', compact('laboratory'));
+      return $pdf->download('laboratory.pdf');
+    }
+
+    public function pdf_list(){
+      $laboratories = Laboratory::all();
+      $pdf = PDF::loadView('laboratories.pdf1', compact('laboratories'));
+      return $pdf->download('laboratory_list.pdf');
     }
 
     /**

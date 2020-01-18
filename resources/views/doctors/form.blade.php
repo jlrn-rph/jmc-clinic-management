@@ -56,7 +56,7 @@
 <!-- Dr Dob Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('dr_dob', 'Date of Birth:') !!}
-    {!! Form::date('dr_dob', null, ['class' => 'form-control','id'=>'dr_dob', 'required']) !!}
+    {!! Form::date('dr_dob', $doctor->dr_dob, ['class' => 'form-control','id'=>'dr_dob', 'required']) !!}
 </div>
 
 @section('scripts')

@@ -9,16 +9,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "barryvdh/laravel-dompdf": "^0.8.5",
         "doctrine/dbal": "~2.3",
         "fideloper/proxy": "^4.0",
-        "haruncpi/laravel-id-generator": "^1.0",
         "infyomlabs/adminlte-templates": "6.0.x-dev",
         "infyomlabs/laravel-generator": "6.0.x-dev",
         "laravel/framework": "^6.2",
+        "laravel/helpers": "^1.1",
         "laravel/tinker": "^2.0",
-        "laravelcollective/html": "^6.0",
-        "nicolaslopezj/searchable": "^1.12",
-        "google/apiclient": "^2.0"
+        "laravelcollective/html": "^6.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

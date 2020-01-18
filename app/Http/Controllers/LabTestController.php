@@ -9,6 +9,9 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use DB;
+use PDF;
+use App\LabTest;
 
 class LabTestController extends AppBaseController
 {
@@ -29,7 +32,7 @@ class LabTestController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $labTests = $this->labTestRepository->all();
+        $labTests = $this->labTestRepository->paginate(15);
 
         return view('lab_tests.index')
             ->with('labTests', $labTests);
@@ -126,6 +129,26 @@ class LabTestController extends AppBaseController
         Flash::success('Lab Test updated successfully.');
 
         return redirect(route('labTests.index'));
+    }
+
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $labTests = DB::table('lab_tests')->where('lt_name','like',"%$query%")
+                        ->paginate(15);
+
+      return view('lab_tests.search-results')->with('labTests', $labTests);
+    }
+
+    public function pdf_list(){
+      $labTests = LabTest::all();
+      $pdf = PDF::loadView('lab_tests.pdf1', compact('labTests'));
+      return $pdf->download('lab_test_list.pdf');
     }
 
     /**

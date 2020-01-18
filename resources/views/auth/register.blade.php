@@ -42,7 +42,7 @@
 
         <form method="post" action="{{ url('/register') }}">
             @csrf
-            
+
             <!-- Name Field-->
             <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
                 <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name">
@@ -89,16 +89,12 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> I agree to the <a href="#">terms</a>
-                        </label>
-                    </div>
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
                 </div>
                 <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                <div class="col-xs-8">
+
                 </div>
                 <!-- /.col -->
             </div>

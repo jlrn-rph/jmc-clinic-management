@@ -1,8 +1,8 @@
 <div class="media col-sm-12">
     <div class="media-left">
-         <a href="#" class="profile-thumb">
+         <!-- <a href="#" class="profile-thumb">
             <img src="https://via.placeholder.com/150" class="img-circle" alt="">
-        </a>
+        </a> -->
     </div>
 
      <div class="media-body">
@@ -85,37 +85,3 @@
     </div>
   </div>
 </div>
-
-<hr>
-<h3 class="col-sm-12">Consultation Details</h3>
-      <div class="row" style="padding-left: 20px; padding-right: 20px;">
-        <div class="col-md-12">
-          <!-- Custom Tabs -->
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">
-                
-
-              </a></li>
-              <li><a href="#tab_2" data-toggle="tab">Prescription</a></li>
-              <li><a href="#tab_3" data-toggle="tab">Laboratory</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_1">
-                Consults
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_2">
-                Prescription
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_3">
-                Laboratory
-              </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- nav-tabs-custom -->
-        </div>
-        <!-- /.col -->
