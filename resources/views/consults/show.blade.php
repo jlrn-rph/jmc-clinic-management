@@ -2,8 +2,11 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Consult
+        <h1>Consult</h1>
+        <h1 class="pull-right">
+          @can('isAdmin')
+          <a href="{{ url('consults/pdf/' . $consult->id) }}" style="margin-top: -50px;margin-bottom: 5px" class="btn btn-danger">Convert to PDF</a>
+          @endcan
         </h1>
     </section>
     <div class="content">

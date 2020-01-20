@@ -1,29 +1,46 @@
-<!-- Pur Date Field -->
-<div class="form-group">
-    {!! Form::label('pur_date', 'Purchase Date:') !!}
-    <p>{{ $purchase->pur_date }}</p>
-</div>
+<div class="media col-sm-12">
+     <div class="media-body">
+		     <h2>
+           <!-- Pur Name Field -->
+           <div class="form-group">
+             {{ $purchase->pur_item }}
+           </div>
+       </h2>
 
-<!-- Pur Billnum Field -->
-<div class="form-group">
-    {!! Form::label('pur_billNum', 'Bill Number:') !!}
-    <p>{{ $purchase->pur_billNum }}</p>
-</div>
+      <h3><small class="display-block">
+        <!-- Pur Date Field -->
+        <div class="form-group col-sm-12">
+            {!! Form::label('pur_date', 'Purchase Date:') !!}
+            {{ $purchase->pur_date }}
+        </div>
 
-<!-- Pur Item Field -->
-<div class="form-group">
-    {!! Form::label('pur_item', 'Item:') !!}
-    <p>{{ $purchase->pur_item }}</p>
-</div>
+        <!-- Pur Billnum Field -->
+        <div class="form-group col-sm-12">
+            {!! Form::label('pur_billNum', 'Bill Number:') !!}
+            {{ $purchase->pur_billNum }}
+        </div>
+      </small></h3>
+	</div>
 
-<!-- Pur Quantity Field -->
-<div class="form-group">
-    {!! Form::label('pur_quantity', 'Quantity:') !!}
-    <p>{{ $purchase->pur_quantity }}</p>
-</div>
+<hr>
 
-<!-- Pur Supplier Field -->
-<div class="form-group">
-    {!! Form::label('pur_supplier', 'Supplier:') !!}
-    <p>{{ $purchase->pur_supplier }}</p>
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">Purchase Details</div>
+      <div class="panel-body">
+        <div class="form-group col-sm-12">
+          <!-- Pur Quantity Field -->
+          <div class="form-group">
+              {!! Form::label('pur_quantity', 'Quantity:') !!}
+              {{ $purchase->pur_quantity }}
+          </div>
+
+          <!-- Pur Supplier Field -->
+          <div class="form-group">
+              {!! Form::label('pur_supplier', 'Supplier:') !!}
+              {{ $purchase->pur_supplier }}
+          </div>
+        </div>
+    </div>
+  </div>
 </div>

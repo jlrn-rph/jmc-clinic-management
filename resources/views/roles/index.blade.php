@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1 class="pull-left">Roles</h1>
         <h1 class="pull-right">
-           <a data-toggle="modal" data-target="#role-add-modal" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px"><i class="fa fa-plus-circle"></i> Add Role</a>
+           <a data-toggle="modal" data-target="#role-add-modal" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px"><i class="fa fa-plus-circle"></i> New Role</a>
         </h1>
     </section>
     <div class="content">

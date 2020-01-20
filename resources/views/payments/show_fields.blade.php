@@ -1,65 +1,91 @@
-<!-- Pay Regnumber Field -->
-<div class="form-group">
-    {!! Form::label('pay_regNumber', 'Payment Number:') !!}
-    <p>{{ $payment->pay_regNumber }}</p>
+<div class="media col-sm-12">
+     <div class="media-body">
+		     <h2>
+           <!-- Pay Name Field -->
+           <div class="form-group">
+             {{ $payment->patients_id }}
+           </div>
+       </h2>
+
+      <h3><small class="display-block">
+        <!-- Pay Regnumber Field -->
+        <div class="form-group col-sm-6">
+            {!! Form::label('pay_regNumber', 'Payment Number:') !!}
+            {{ $payment->pay_regNumber }}
+        </div>
+
+        <!-- Pay Regdate Field -->
+        <div class="form-group col-sm-6">
+            {!! Form::label('pay_regDate', 'Date:') !!}
+            {{ $payment->pay_regDate }}
+        </div>
+      </small></h3>
+	</div>
+
+<hr>
+
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">Personal Details</div>
+      <div class="panel-body">
+        <div class="form-group col-sm-12">
+          <!-- Pay Address Field -->
+          <div class="form-group">
+              {!! Form::label('pay_address', 'Address:') !!}
+              {{ $payment->pay_address }}
+          </div>
+        </div>
+    </div>
+  </div>
 </div>
 
-<!-- Pay Regdate Field -->
-<div class="form-group">
-    {!! Form::label('pay_regDate', 'Date:') !!}
-    <p>{{ $payment->pay_regDate }}</p>
-</div>
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">Payment Details</div>
+      <div class="panel-body">
+        <div class="form-group col-sm-12">
+          <!-- Pay Admission Field -->
+          <div class="form-group">
+              {!! Form::label('pay_admission', 'Admission Cost:') !!}
+              {{ $payment->pay_admission }}
+          </div>
 
-<!-- Pay Name Field -->
-<div class="form-group">
-    {!! Form::label('pay_name', 'Patient Name:') !!}
-    <p>{{ $payment->patients->px_name }}</p>
-</div>
+          <!-- Pay Consultation Field -->
+          <div class="form-group">
+              {!! Form::label('pay_consultation', 'Consultation Cost:') !!}
+              {{ $payment->pay_consultation }}
+          </div>
 
-<!-- Pay Address Field -->
-<div class="form-group">
-    {!! Form::label('pay_address', 'Address:') !!}
-    <p>{{ $payment->pay_address }}</p>
-</div>
+          <!-- Pay Lab Field -->
+          <div class="form-group">
+              {!! Form::label('pay_lab', 'Lab Cost:') !!}
+              {{ $payment->pay_lab }}
+          </div>
 
-<!-- Pay Admission Field -->
-<div class="form-group">
-    {!! Form::label('pay_admission', 'Admission Cost:') !!}
-    <p>{{ $payment->pay_admission }}</p>
-</div>
+          <!-- Pay Others Field -->
+          <div class="form-group">
+              {!! Form::label('pay_others', 'Others:') !!}
+              {{ $payment->pay_others }}
+          </div>
 
-<!-- Pay Consultation Field -->
-<div class="form-group">
-    {!! Form::label('pay_consultation', 'Consultation Cost:') !!}
-    <p>{{ $payment->pay_consultation }}</p>
-</div>
+          <!-- Pay Subtotal Field -->
+          <div class="form-group">
+              {!! Form::label('pay_subtotal', 'Subtotal:') !!}
+              {{ $payment->pay_subtotal }}
+          </div>
 
-<!-- Pay Lab Field -->
-<div class="form-group">
-    {!! Form::label('pay_lab', 'Lab Cost:') !!}
-    <p>{{ $payment->pay_lab }}</p>
-</div>
+          <!-- Pay Vat Field -->
+          <div class="form-group">
+              {!! Form::label('pay_vat', 'VAT:') !!}
+              {{ $payment->pay_vat }}
+          </div>
 
-<!-- Pay Others Field -->
-<div class="form-group">
-    {!! Form::label('pay_others', 'Others:') !!}
-    <p>{{ $payment->pay_others }}</p>
-</div>
-
-<!-- Pay Subtotal Field -->
-<div class="form-group">
-    {!! Form::label('pay_subtotal', 'Subtotal:') !!}
-    <p>{{ $payment->pay_subtotal }}</p>
-</div>
-
-<!-- Pay Vat Field -->
-<div class="form-group">
-    {!! Form::label('pay_vat', 'VAT:') !!}
-    <p>{{ $payment->pay_vat }}</p>
-</div>
-
-<!-- Pay Total Field -->
-<div class="form-group">
-    {!! Form::label('pay_total', 'Total:') !!}
-    <p>{{ $payment->pay_total }}</p>
+          <!-- Pay Total Field -->
+          <div class="form-group">
+              {!! Form::label('pay_total', 'Total:') !!}
+              {{ $payment->pay_total }}
+          </div>
+        </div>
+    </div>
+  </div>
 </div>

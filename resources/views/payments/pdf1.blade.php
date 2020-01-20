@@ -13,7 +13,7 @@
             <tr>
                 <td>{{ $payment->pay_regNumber }}</td>
                 <td>{{ $payment->pay_regDate }}</td>
-                <td>{{ $payment->patients->px_name }}</td>
+                <td>{{ $payment->patients_id }}</td>
                 <td>{{ $payment->pay_total }}</td>
                 <td>
             </tr>

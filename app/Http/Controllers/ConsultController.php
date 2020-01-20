@@ -11,6 +11,10 @@ use Flash;
 use Response;
 use App\Patient;
 use App\Consult;
+use App\Doctor;
+use Gate;
+use DB;
+use PDF;
 
 class ConsultController extends AppBaseController
 {
@@ -31,9 +35,13 @@ class ConsultController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $consults = $this->consultRepository->all();
         $patient = Patient::all();
-        return view('consults.index', compact('patient'))
+        $doctors = Doctor::all();
+        return view('consults.index', compact('patient', 'doctors'))
             ->with('consults', $consults);
     }
 
@@ -45,8 +53,12 @@ class ConsultController extends AppBaseController
        */
     public function create()
     {
+      if(!Gate::allows('isAdmin')){
+        abort(404, "Sorry, you're not authorize to do this");
+      }
          $consult = Consult::all();
-        return view('consults.create');
+         $doctors = Doctor::all();
+        return view('consults.create', compact('doctors'));
     }
 
     /**
@@ -75,15 +87,18 @@ class ConsultController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $consult = $this->consultRepository->find($id);
-        
+        $doctors = Doctor::all();
         if (empty($consult)) {
             Flash::error('Consult not found');
 
             return redirect(route('consults.index'));
         }
 
-        return view('consults.show')->with('consult', $consult);
+        return view('consults.show', compact('doctors'))->with('consult', $consult);
     }
 
     /**
@@ -95,15 +110,19 @@ class ConsultController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $consult = $this->consultRepository->find($id);
         $patient = Patient::all();
+        $doctors = Doctor::all();
         if (empty($consult)) {
             Flash::error('Consult not found');
 
             return redirect(route('consults.index'));
         }
 
-        return view('consults.edit', compact('patient'))->with('consult', $consult);
+        return view('consults.edit', compact('patient','doctors'))->with('consult', $consult);
     }
 
     /**
@@ -131,6 +150,39 @@ class ConsultController extends AppBaseController
         return redirect(route('consults.index'));
     }
 
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $consults = DB::table('consults')->where('patients_name','like',"%$query%")
+                        ->orWhere('doctor_name','like',"%$query%")
+                        ->paginate(15);
+
+      return view('consults.search-results')->with('consults', $consults);
+    }
+
+    public function pdf($id){
+      if(!Gate::allows('isAdmin')){
+        abort(404, "Sorry, you're not authorize to do this");
+      }
+      $consults = Consult::find($id);
+      $pdf = PDF::loadView('consults.pdf', compact('consults'));
+      return $pdf->download('consults.pdf');
+    }
+
+    public function pdf_list(){
+      if(!Gate::allows('isAdmin')){
+        abort(404, "Sorry, you're not authorize to do this");
+      }
+      $consults = Consult::all();
+      $pdf = PDF::loadView('consults.pdf1', compact('consults', 'consults'));
+      return $pdf->download('consult_list.pdf');
+    }
+
     /**
      * Remove the specified Consult from storage.
      *
@@ -142,6 +194,9 @@ class ConsultController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $consult = $this->consultRepository->find($id);
 
         if (empty($consult)) {

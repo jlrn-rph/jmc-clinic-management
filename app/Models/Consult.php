@@ -33,7 +33,8 @@ class Consult extends Model
 
     public $fillable = [
         'con_dateSxStart',
-        'patients_id',
+        'patients_name',
+        'doctor_name',
         'con_height',
         'con_weight',
         'con_bp',
@@ -48,7 +49,8 @@ class Consult extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'patients_id' => 'string',
+        'patients_name' => 'string',
+        'doctor_name' => 'string',
         'con_dateSxStart' => 'date',
         'con_height' => 'string',
         'con_weight' => 'string',
@@ -63,7 +65,7 @@ class Consult extends Model
      * @var array
      */
     public static $rules = [
-        'patients_id' => 'string',
+        'patients_name' => 'string',
         'con_dateSxStart' => 'required',
         'con_symptom' => 'required',
         'con_diagnosis' => 'required'

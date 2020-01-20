@@ -2,9 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Specialist
-        </h1>
+        <h1>Specialization</h1>
     </section>
     <div class="content">
         @include('adminlte-templates::common.errors')

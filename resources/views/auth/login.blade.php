@@ -30,24 +30,24 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(147,212,164,1) 100%);
+" >
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/') }}"><b>Clinic Management System</b></a>
+        <a href="{{ url('/') }}" style="color: rgba(11,102,35,1);"><b>Clinic Management System</b></a>
     </div>
 
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg" style="color: rgba(11,102,35,1);">Sign in to start your session</p>
 
         <form method="post" action="{{ url('/login') }}">
             @csrf
 
             <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
                 <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <span class="glyphicon glyphicon-envelope form-control-feedback" style="color: rgba(11,102,35,1);"></span>
                 @if ($errors->has('email'))
                     <span class="help-block">
                     <strong>{{ $errors->first('email') }}</strong>
@@ -57,7 +57,7 @@
 
             <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
                 <input type="password" class="form-control" placeholder="Password" name="password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span class="glyphicon glyphicon-lock form-control-feedback" style="color: rgba(11,102,35,1);"></span>
                 @if ($errors->has('password'))
                     <span class="help-block">
                     <strong>{{ $errors->first('password') }}</strong>
@@ -68,21 +68,21 @@
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
-                        <label>
+                        <label style="color: rgba(11,102,35,1);">
                             <input type="checkbox" name="remember"> Remember Me
                         </label>
                     </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" style="background: rgba(11,102,35,1);">Sign In</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
         <!--<a href="{{ url('/password/reset') }}">Forgot password</a><br>-->
-        <a href="{{ url('/register') }}" class="text-center">Not yet a member? Click here to register.</a>
+        <a href="{{ url('/register') }}" class="text-center" style="color: rgba(11,102,35,1);">Not yet a member? Click here to register.</a>
 
     </div>
     <!-- /.login-box-body -->
@@ -96,13 +96,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/js/adminlte.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
-<script>
+<script text="text/javascript">
     $(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' // optional
         });
+    });
+
+    $(document).ready(function(){
+      var isAuth = "<?php echo Auth::check(); ?>";
+      if(location.href === 'http://127.0.0.1:8000/login/'){
+        if (isAuth) location.href('/patients');
+      }
+      else {
+        if(!isAuth) location.href('/login')
+      }
     });
 </script>
 </body>

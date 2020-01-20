@@ -12,7 +12,7 @@ use Response;
 use DB;
 use PDF;
 use App\Purchase;
-
+use Gate;
 class PurchaseController extends AppBaseController
 {
     /** @var  PurchaseRepository */
@@ -32,7 +32,10 @@ class PurchaseController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $purchases = $this->purchaseRepository->paginate(15);
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $purchases = $this->purchaseRepository->all();
 
         return view('purchases.index')
             ->with('purchases', $purchases);
@@ -45,6 +48,9 @@ class PurchaseController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         return view('purchases.create');
     }
 
@@ -75,6 +81,9 @@ class PurchaseController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $purchase = $this->purchaseRepository->find($id);
 
         if (empty($purchase)) {
@@ -95,6 +104,9 @@ class PurchaseController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $purchase = $this->purchaseRepository->find($id);
 
         if (empty($purchase)) {
@@ -162,6 +174,9 @@ class PurchaseController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $purchase = $this->purchaseRepository->find($id);
 
         if (empty($purchase)) {

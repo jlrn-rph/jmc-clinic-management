@@ -24,8 +24,5 @@
                     {!! Form::close() !!}
             </div>
         </div>
-        <div class="pagination navigation">
-          {{ $staff->links() }}
-        </div>
     </div>
 @endsection

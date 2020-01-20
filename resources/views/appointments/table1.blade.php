@@ -20,14 +20,16 @@
             <!--<td>{{ $appointment->ap_contact }}</td>-->
             <td>{{ $appointment->ap_doctor }}</td>
             <td>{{ $appointment->ap_specialist }}</td>
-            <td>{{ $appointment->ap_reason }}</td>
+            <td>{{ str_limit($appointment->ap_reason, 30) }}</td>
             <td>{{ $appointment->ap_status }}</td>
                 <td>
                     {!! Form::open(['route' => ['appointments.destroy', $appointment->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
                         <a href="{{ route('appointments.show', [$appointment->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                        @can(['isAdmin'])
                         <a href="{{ route('appointments.edit', [$appointment->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        @endcan
                     </div>
                     {!! Form::close() !!}
                 </td>
@@ -35,4 +37,3 @@
         @endforeach
         </tbody>
     </table>
-</div>

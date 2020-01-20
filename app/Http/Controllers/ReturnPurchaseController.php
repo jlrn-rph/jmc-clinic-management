@@ -12,6 +12,7 @@ use Response;
 use DB;
 use PDF;
 use App\ReturnPurchase;
+use Gate;
 
 class ReturnPurchaseController extends AppBaseController
 {
@@ -32,7 +33,10 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $returnPurchases = $this->returnPurchaseRepository->paginate(15);
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $returnPurchases = $this->returnPurchaseRepository->all();
 
         return view('return_purchases.index')
             ->with('returnPurchases', $returnPurchases);
@@ -45,6 +49,9 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         return view('return_purchases.create');
     }
 
@@ -75,6 +82,9 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $returnPurchase = $this->returnPurchaseRepository->find($id);
 
         if (empty($returnPurchase)) {
@@ -95,6 +105,9 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $returnPurchase = $this->returnPurchaseRepository->find($id);
 
         if (empty($returnPurchase)) {
@@ -162,6 +175,9 @@ class ReturnPurchaseController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $returnPurchase = $this->returnPurchaseRepository->find($id);
 
         if (empty($returnPurchase)) {

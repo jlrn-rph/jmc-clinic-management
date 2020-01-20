@@ -35,7 +35,10 @@ class AppointmentController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $appointments = $this->appointmentRepository->paginate(15);
+        if(!Gate::allows('isAdmin')  && !Gate::allows('isStaff') && !Gate::allows('isPatient') ){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $appointments = $this->appointmentRepository->all();
 
         return view('appointments.index')
             ->with('appointments', $appointments);
@@ -48,7 +51,9 @@ class AppointmentController extends AppBaseController
      */
     public function create()
     {
-
+      if(!Gate::allows('isAdmin') && !Gate::allows('isPatient') && !Gate::allows('isStaff') ){
+        abort(404, "Sorry, you're not authorize to do this");
+      }
         return view('appointments.create');
     }
 
@@ -79,6 +84,9 @@ class AppointmentController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin')  && !Gate::allows('isStaff')  && !Gate::allows('isPatient')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $appointment = $this->appointmentRepository->find($id);
 
         if (empty($appointment)) {
@@ -87,7 +95,7 @@ class AppointmentController extends AppBaseController
             return redirect(route('appointments.index'));
         }
 
-        return view('appointments.show')->with('appointment', $appointment)->paginate();
+        return view('appointments.show')->with('appointment', $appointment);
     }
 
     /**
@@ -99,6 +107,10 @@ class AppointmentController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff') ){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $appointment = $this->appointmentRepository->find($id);
 
         if (empty($appointment)) {
@@ -151,6 +163,10 @@ class AppointmentController extends AppBaseController
     }
 
     public function pdf_list(){
+      if(!Gate::allows('isAdmin')){
+        abort(404, "Sorry, you're not authorize to do this");
+      }
+
       $appointments = Appointment::all();
       $pdf = PDF::loadView('appointments.pdf1', compact('appointments'));
       return $pdf->download('appointment_list.pdf');
@@ -167,7 +183,10 @@ class AppointmentController extends AppBaseController
      * @return Response
      */
     public function destroy($id)
-    {
+{
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $appointment = $this->appointmentRepository->find($id);
 
         if (empty($appointment)) {

@@ -1,12 +1,20 @@
 <div class="form-group col-sm-12">
-  <label for="patients_id">Patient Name: </label>
-  <select name="patients_id" id="patients_id" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient" disabled>
+  <label for="patients_name">Patient Name: </label>
+  <select name="patients_name" id="patients_name" class="form-control selectpicker"  data-live-search="true" title="Select Patient" required>
     @foreach($patient as $patient)
-      <option value="{{$patient->px_name}}"{{ $patient->px_name == $consult->patients_id ? 'selected' :'' }}> {{$patient->px_name}}</option>
+      <option value="{{$patient->px_name}}"{{ $patient->px_name == $consult->patients_name ? 'selected' :'' }}> {{$patient->px_name}}</option>
     @endforeach
   </select>
 </div>
 
+<div class="form-group col-sm-12">
+    {!! Form::label('doctor_name', 'Doctor-in-Charge:') !!}
+      <select name="doctor_name" id="doctor_name" class="form-control selectpicker"  data-live-search="true" title="Select Doctor" required>
+        @foreach($doctors as $doctor)
+            <option value="{{$doctor->dr_name}}" {{$doctor->dr_name == $consult->doctor_name ? 'selected' : ''}}> {{$doctor->dr_name}}</option>
+        @endforeach
+      </select>
+</div>
 <!-- Con Datesxstart Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('con_dateSxStart', 'Date:') !!}
@@ -23,21 +31,21 @@
 @endsection
 
 <!-- Con Height Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-6">
     {!! Form::label('con_height', 'Height:') !!}
-    {!! Form::text('con_height', null, ['class' => 'form-control']) !!}
+    {!! Form::text('con_height', null, ['class' => 'form-control', 'maxlength'=>'5', 'onkeypress'=>"return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"]) !!}
 </div>
 
 <!-- Con Weight Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-6">
     {!! Form::label('con_weight', 'Weight:') !!}
-    {!! Form::text('con_weight', null, ['class' => 'form-control']) !!}
+    {!! Form::text('con_weight', null, ['class' => 'form-control', 'maxlength'=>'5', 'onkeypress'=>"return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"]) !!}
 </div>
 
 <!-- Con Bp Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('con_bp', 'Blood Pressure:') !!}
-    {!! Form::text('con_bp', null, ['class' => 'form-control']) !!}
+    {!! Form::text('con_bp', null, ['class' => 'form-control','maxlength'=>'10']) !!}
 </div>
 
 <!-- Con Symptom Field -->

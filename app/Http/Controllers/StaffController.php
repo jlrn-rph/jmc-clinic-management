@@ -12,7 +12,7 @@ use Response;
 use DB;
 use PDF;
 use App\Staff;
-
+use Gate;
 class StaffController extends AppBaseController
 {
     /** @var  StaffRepository */
@@ -32,7 +32,10 @@ class StaffController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $staff = $this->staffRepository->paginate(15);
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $staff = $this->staffRepository->all();
 
         return view('staff.index')
             ->with('staff', $staff);
@@ -45,6 +48,9 @@ class StaffController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         return view('staff.create');
     }
 
@@ -75,6 +81,10 @@ class StaffController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $staff = $this->staffRepository->find($id);
 
         if (empty($staff)) {
@@ -95,6 +105,10 @@ class StaffController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $staff = $this->staffRepository->find($id);
 
         if (empty($staff)) {
@@ -141,6 +155,7 @@ class StaffController extends AppBaseController
 
       $staff = DB::table('staff')->where('stf_name','like',"%$query%")
                         ->orWhere('stf_department','like',"%$query%")
+                        ->orWhere('stf_status','like',"$query%")
                         ->paginate(15);
 
       return view('staff.search-results')->with('staff', $staff);
@@ -169,6 +184,10 @@ class StaffController extends AppBaseController
      */
     public function destroy($id)
     {
+          if(!Gate::allows('isAdmin')){
+            abort(404, "Sorry, you're not authorize to do this");
+          }
+
         $staff = $this->staffRepository->find($id);
 
         if (empty($staff)) {

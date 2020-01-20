@@ -12,6 +12,7 @@ use Response;
 use DB;
 use PDF;
 use App\Item;
+use Gate;
 
 class ItemController extends AppBaseController
 {
@@ -32,7 +33,10 @@ class ItemController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $items = $this->itemRepository->paginate(15);
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $items = $this->itemRepository->all();
 
         return view('items.index')
             ->with('items', $items);
@@ -45,6 +49,9 @@ class ItemController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         return view('items.create');
     }
 
@@ -75,6 +82,9 @@ class ItemController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $item = $this->itemRepository->find($id);
 
         if (empty($item)) {
@@ -95,6 +105,9 @@ class ItemController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $item = $this->itemRepository->find($id);
 
         if (empty($item)) {
@@ -162,6 +175,9 @@ class ItemController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $item = $this->itemRepository->find($id);
 
         if (empty($item)) {

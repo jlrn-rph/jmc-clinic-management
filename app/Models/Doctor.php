@@ -80,7 +80,7 @@ class Doctor extends Model
         'dr_email' => 'string',
         'dr_fee' => 'string',
         'dr_daysAvail' => 'string',
-        'dr_status' => 'integer'
+        'dr_status' => 'string'
     ];
 
     /**

@@ -12,6 +12,7 @@ use Response;
 use DB;
 use PDF;
 use App\LabTest;
+use Gate;
 
 class LabTestController extends AppBaseController
 {
@@ -32,7 +33,10 @@ class LabTestController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $labTests = $this->labTestRepository->paginate(15);
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $labTests = $this->labTestRepository->all();
 
         return view('lab_tests.index')
             ->with('labTests', $labTests);
@@ -45,6 +49,9 @@ class LabTestController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         return view('lab_tests.create');
     }
 
@@ -75,6 +82,9 @@ class LabTestController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $labTest = $this->labTestRepository->find($id);
 
         if (empty($labTest)) {
@@ -95,6 +105,9 @@ class LabTestController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $labTest = $this->labTestRepository->find($id);
 
         if (empty($labTest)) {
@@ -162,6 +175,9 @@ class LabTestController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $labTest = $this->labTestRepository->find($id);
 
         if (empty($labTest)) {

@@ -33,6 +33,7 @@ class Prescription extends Model
     public $fillable = [
         'rx_generic',
         'px_name',
+        'doctor_name',
         'rx_brand',
         'rx_freq',
         'rx_days',
@@ -47,6 +48,7 @@ class Prescription extends Model
     protected $casts = [
         'id' => 'integer',
         'px_name'  => 'string',
+        'doctor_name' => 'string',
         'rx_generic' => 'string',
         'rx_brand' => 'string',
         'rx_freq' => 'string',

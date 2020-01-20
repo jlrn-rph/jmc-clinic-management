@@ -15,7 +15,7 @@
 
                         @include('users.form')
                         <div class="col-sm-12">
-                          <a class="btn btn-close" href="{{ route('schedules.index') }}">Cancel</a>
+                          <a class="btn btn-close" href="{{ route('users.index') }}">Cancel</a>
                           {!! Form::submit('Update User', ['class' => 'btn btn-info']) !!}
                         </div>
                    {!! Form::close() !!}

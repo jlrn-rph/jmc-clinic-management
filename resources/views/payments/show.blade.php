@@ -4,7 +4,9 @@
     <section class="content-header">
         <h1>Payment</h1>
         <h1 class="pull-right">
-          <!-- <a href="{{ url('payments/pdf/' . $payment->id) }}" style="margin-top: -50px;margin-bottom: 5px" class="btn btn-danger">Convert to PDF</a> -->
+          @can('isAdmin')
+          <a href="{{ url('payments/pdf/' . $payment->id) }}" style="margin-top: -50px;margin-bottom: 5px" class="btn btn-danger">Convert to PDF</a>
+          @endcan
         </h1>
     </section>
     <div class="content">

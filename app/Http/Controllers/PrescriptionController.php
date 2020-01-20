@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Patient;
+use App\Doctor;
+use Gate;
+use PDF;
+use DB;
+use App\Prescription;
 
 class PrescriptionController extends AppBaseController
 {
@@ -30,9 +35,14 @@ class PrescriptionController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $prescriptions = $this->prescriptionRepository->all();
         $patients = Patient::all();
-        return view('prescriptions.index', compact('patients'))
+        $doctors = Doctor::all();
+        return view('prescriptions.index', compact('patients', 'doctors'))
             ->with('prescriptions', $prescriptions);
     }
 
@@ -43,7 +53,12 @@ class PrescriptionController extends AppBaseController
      */
     public function create()
     {
-        return view('prescriptions.create');
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $doctors = Doctor::all();
+
+        return view('prescriptions.create', compact('doctors'));
     }
 
     /**
@@ -73,15 +88,20 @@ class PrescriptionController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $prescription = $this->prescriptionRepository->find($id);
         $patients = Patient::all();
+        $doctors = Doctor::all();
         if (empty($prescription)) {
             Flash::error('Prescription not found');
 
             return redirect(route('prescriptions.index'));
         }
 
-        return view('prescriptions.show', compact('patients'))->with('prescription', $prescription);
+        return view('prescriptions.show', compact('patients','doctors'))->with('prescription', $prescription);
     }
 
     /**
@@ -93,15 +113,21 @@ class PrescriptionController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+
         $prescription = $this->prescriptionRepository->find($id);
         $patients = Patient::all();
+        $doctors = Doctor::all();
+
         if (empty($prescription)) {
             Flash::error('Prescription not found');
 
             return redirect(route('prescriptions.index'));
         }
 
-        return view('prescriptions.edit', compact('patients'))->with('prescription', $prescription);
+        return view('prescriptions.edit', compact('patients','doctors'))->with('prescription', $prescription);
     }
 
     /**
@@ -129,6 +155,38 @@ class PrescriptionController extends AppBaseController
         return redirect(route('prescriptions.index'));
     }
 
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $prescriptions = DB::table('prescriptions')->where('px_name','like',"%$query%")
+                        ->orWhere('doctor_name','like',"%$query%")
+                        ->paginate(15);
+
+      return view('prescriptions.search-results')->with('prescriptions', $prescriptions);
+    }
+
+    public function pdf($id){
+      if(!Gate::allows('isAdmin')){
+        abort(404, "Sorry, you're not authorize to do this");
+      }
+      $prescriptions = Prescription::find($id);
+      $pdf = PDF::loadView('prescriptions.pdf', compact('prescriptions'));
+      return $pdf->download('prescriptions.pdf');
+    }
+
+    public function pdf_list(){
+      if(!Gate::allows('isAdmin')){
+        abort(404, "Sorry, you're not authorize to do this");
+      }
+      $prescriptions = Prescription::all();
+      $pdf = PDF::loadView('prescriptions.pdf1', compact('prescriptions'));
+      return $pdf->download('prescriptions_list.pdf');
+    }
     /**
      * Remove the specified Prescription from storage.
      *
@@ -140,6 +198,9 @@ class PrescriptionController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $prescription = $this->prescriptionRepository->find($id);
 
         if (empty($prescription)) {

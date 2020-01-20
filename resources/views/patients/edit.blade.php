@@ -11,7 +11,7 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($patient, ['route' => ['patients.update', $patient->id], 'method' => 'patch', 'enctype'=>'multipart/form-data']) !!}
+                   {!! Form::model($patient, ['route' => ['patients.update', $patient->id], 'method' => 'patch']) !!}
 
                         @include('patients.form')
                         <div class="col-sm-12">

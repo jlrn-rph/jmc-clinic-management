@@ -37,7 +37,7 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="#" class="logo">
+            <a href="/" class="logo">
                 <b>Clinic Management System</b>
             </a>
 
@@ -166,6 +166,7 @@
 
     <!-- select -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     @yield('scripts')
 </body>

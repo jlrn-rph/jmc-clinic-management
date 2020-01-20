@@ -27,7 +27,7 @@ class Laboratory extends Model
     use SoftDeletes;
 
     public $table = 'laboratories';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -67,7 +67,7 @@ class Laboratory extends Model
         'lab_email' => 'string',
         'lab_doctor' => 'string',
         'lab_test' => 'string',
-        'lab_status' => 'integer'
+        'lab_status' => 'string'
     ];
 
     /**
@@ -89,5 +89,5 @@ class Laboratory extends Model
         'lab_status' => 'required'
     ];
 
-    
+
 }

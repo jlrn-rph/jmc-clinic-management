@@ -1,5 +1,5 @@
-<!-- <div>
+<div>
   @include('payments.search')
-</div> -->
+</div>
 
 @include('payments.table1')

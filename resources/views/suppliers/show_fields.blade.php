@@ -1,23 +1,38 @@
-<!-- Sup Name Field -->
-<div class="form-group">
-    {!! Form::label('sup_name', 'Supplier Name:') !!}
-    <p>{{ $supplier->sup_name }}</p>
-</div>
+<div class="media col-sm-12">
+     <div class="media-body">
+		     <h2>
+           <!-- Sup Name Field -->
+           <div class="form-group">
+             {{ $supplier->sup_name }}
+           </div>
+       </h2>
+	</div>
 
-<!-- Sup Address Field -->
-<div class="form-group">
-    {!! Form::label('sup_address', 'Address:') !!}
-    <p>{{ $supplier->sup_address }}</p>
-</div>
+<hr>
 
-<!-- Sup Contact Field -->
-<div class="form-group">
-    {!! Form::label('sup_contact', 'Contact:') !!}
-    <p>{{ $supplier->sup_contact }}</p>
-</div>
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">Supplier Details</div>
+      <div class="panel-body">
+        <div class="form-group col-sm-12">
+          <!-- Sup Address Field -->
+          <div class="form-group">
+              {!! Form::label('sup_address', 'Address:') !!}
+              {{ $supplier->sup_address }}  
+          </div>
 
-<!-- Sup Email Field -->
-<div class="form-group">
-    {!! Form::label('sup_email', 'Email:') !!}
-    <p>{{ $supplier->sup_email }}</p>
+          <!-- Sup Contact Field -->
+          <div class="form-group">
+              {!! Form::label('sup_contact', 'Contact:') !!}
+              {{ $supplier->sup_contact }}  
+          </div>
+
+          <!-- Sup Email Field -->
+          <div class="form-group">
+              {!! Form::label('sup_email', 'Email:') !!}
+              {{ $supplier->sup_email }}  
+          </div>
+        </div>
+    </div>
+  </div>
 </div>

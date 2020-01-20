@@ -12,7 +12,7 @@ use Response;
 use DB;
 use PDF;
 use App\Supplier;
-
+use Gate;
 class SupplierController extends AppBaseController
 {
     /** @var  SupplierRepository */
@@ -32,7 +32,10 @@ class SupplierController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $suppliers = $this->supplierRepository->paginate(15);
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $suppliers = $this->supplierRepository->all();
 
         return view('suppliers.index')
             ->with('suppliers', $suppliers);
@@ -45,6 +48,9 @@ class SupplierController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         return view('suppliers.create');
     }
 
@@ -75,6 +81,9 @@ class SupplierController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $supplier = $this->supplierRepository->find($id);
 
         if (empty($supplier)) {
@@ -95,6 +104,9 @@ class SupplierController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $supplier = $this->supplierRepository->find($id);
 
         if (empty($supplier)) {
@@ -162,6 +174,9 @@ class SupplierController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $supplier = $this->supplierRepository->find($id);
 
         if (empty($supplier)) {

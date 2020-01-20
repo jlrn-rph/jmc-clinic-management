@@ -1,7 +1,7 @@
 <!-- Lab Regnumber Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_regNumber', 'Registration Number:') !!}
-    {!! Form::text('lab_regNumber', null, ['class' => 'form-control']) !!}
+    {!! Form::text('lab_regNumber', null, ['class' => 'form-control', 'required', 'autofocus required title'=>'Please enter numbers between 1 to 10 digits', 'pattern'=> '[0-9]{0,10}', 'onkeypress'=>"return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"]) !!}
 </div>
 
 <!-- Lab Regdate Field -->
@@ -22,7 +22,7 @@
 <!-- Lab Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_name', 'Patient Name:') !!}
-      <select name="lab_name" id="lab_name" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Select Patient" title="Select Patient">
+      <select name="lab_name" id="lab_name" class="form-control selectpicker"  data-live-search="true" title="Select Patient" required>
     @foreach($patients as $patient)
       <option value="{{$patient->px_name}}"{{ $patient->px_name == $laboratory->lab_name ? 'selected' : ''}}> {{$patient->px_name}}</option>
     @endforeach
@@ -32,7 +32,7 @@
 <!-- Lab Address Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('lab_address', 'Address:') !!}
-    {!! Form::textarea('lab_address', null, ['class' => 'form-control','cols'=>40, 'rows'=>2, 'required']) !!}
+    {!! Form::textarea('lab_address', null, ['class' => 'form-control','cols'=>40, 'rows'=>2, 'required', 'maxlength'=>'100']) !!}
 </div>
 
 <!-- Lab Dob Field -->
@@ -60,25 +60,29 @@
 <!-- Lab Contact Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_contact', 'Contact:') !!}
-    {!! Form::text('lab_contact', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::text('lab_contact', null, ['class' => 'form-control', 'required', 'autofocus required title'=>'Please enter numbers between 7 to 13 digits', 'pattern'=> '[0-9]{6,13}', 'onkeypress'=>"return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"]) !!}
 </div>
 
 <!-- Lab Email Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('lab_email', 'Lab Email:') !!}
-    {!! Form::text('lab_email', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::label('lab_email', 'Email:') !!}
+    {!! Form::text('lab_email', null, ['class' => 'form-control', 'required', 'maxlength'=> '50']) !!}
 </div>
 
 <!-- Lab Doctor Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_doctor', 'Requesting Physician:') !!}
-    {!! Form::text('lab_doctor', null, ['class' => 'form-control', 'required']) !!}
+    <select name="lab_doctor" id="lab_doctor" class="form-control selectpicker"  data-live-search="true" title="Select Doctor" required>
+      @foreach($doctors as $doctor)
+          <option value="{{$doctor->dr_name}}" {{ $doctor->dr_name ==  $laboratory->lab_doctor ? 'selected' : '' }}> {{$doctor->dr_name}}</option>
+      @endforeach
+    </select>
 </div>
 
 <!-- Lab Test Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_test', 'Test Ordered:') !!}
-    <select name="lab_test" id="lab_test" class="form-control selectpicker"  data-live-search="true" data-live-search-placeholder="Test Type" title="Test Type">
+    <select name="lab_test" id="lab_test" class="form-control selectpicker"  data-live-search="true" title="Test Type" required>
     @foreach($labtests as $labtest)
       <option value="{{$labtest->lt_name}}"{{$labtest->lt_name == $laboratory->lab_test ? 'selected' : ''}}> {{$labtest->lt_name}}</option>
     @endforeach
@@ -88,5 +92,10 @@
 <!-- Lab Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lab_status', 'Status:') !!}
-    {!! Form::number('lab_status', null, ['class' => 'form-control', 'required']) !!}
+    <select class="form-control" name="lab_status" id="lab_status" required>
+      <option value="">Select Status</option>
+      <option value="Pending"{{ 'Pending'== $laboratory->lab_status ? 'selected' : ''}}>Pending</option>
+      <option value="On-process"{{ 'On-process'== $laboratory->lab_status ? 'selected' : ''}}>On-going</option>
+      <option value="Done"{{ 'Done'== $laboratory->lab_status ? 'selected' : ''}}>Done</option>
+    </select>
 </div>

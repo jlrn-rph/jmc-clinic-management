@@ -31,14 +31,15 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition register-page">
+<body class="hold-transition register-page" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(147,212,164,1) 100%);
+">
 <div class="register-box">
     <div class="register-logo">
-        <a href="{{ url('/') }}"><b>Clinic Management System</b></a>
+        <a href="{{ url('/') }}" style="color: rgba(11,102,35,1);"><b>Clinic Management System</b></a>
     </div>
 
     <div class="register-box-body">
-        <p class="login-box-msg">Register as New Patient</p>
+        <p class="login-box-msg" style="color: rgba(11,102,35,1);">Register as New Patient</p>
 
         <form method="post" action="{{ url('/register') }}">
             @csrf
@@ -46,7 +47,7 @@
             <!-- Name Field-->
             <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
                 <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span class="glyphicon glyphicon-user form-control-feedback" style="color: rgba(11,102,35,1);"></span>
 
                 @if ($errors->has('name'))
                     <span class="help-block">
@@ -57,7 +58,7 @@
             <!--Email Field -->
             <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
                 <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <span class="glyphicon glyphicon-envelope form-control-feedback" style="color: rgba(11,102,35,1);"></span>
 
                 @if ($errors->has('email'))
                     <span class="help-block">
@@ -68,7 +69,7 @@
 
             <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
                 <input type="password" class="form-control" name="password" placeholder="Password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span class="glyphicon glyphicon-lock form-control-feedback" style="color: rgba(11,102,35,1);"></span>
 
                 @if ($errors->has('password'))
                     <span class="help-block">
@@ -79,7 +80,7 @@
 
             <div class="form-group has-feedback{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                 <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span class="glyphicon glyphicon-lock form-control-feedback" style="color: rgba(11,102,35,1);"></span>
 
                 @if ($errors->has('password_confirmation'))
                     <span class="help-block">
@@ -90,7 +91,7 @@
 
             <div class="row">
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" style="background: rgba(11,102,35,1);">Register</button>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-8">
@@ -100,7 +101,7 @@
             </div>
         </form>
 
-        <a href="{{ url('/login') }}" class="text-center">I already have a membership</a>
+        <a href="{{ url('/login') }}" class="text-center" style="color: rgba(11,102,35,1);">I already have a membership</a>
     </div>
     <!-- /.form-box -->
 </div>

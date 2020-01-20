@@ -13,8 +13,11 @@
                <div class="row">
                    {!! Form::model($staff, ['route' => ['staff.update', $staff->id], 'method' => 'patch']) !!}
 
-                        @include('staff.fields')
-
+                        @include('staff.form')
+                        <div class="col-sm-12">
+                          <a class="btn btn-close" href="{{ route('staff.index') }}">Cancel</a>
+                          {!! Form::submit('Update Staff', ['class' => 'btn btn-info']) !!}
+                        </div>
                    {!! Form::close() !!}
                </div>
            </div>

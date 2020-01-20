@@ -1,3 +1,4 @@
+</div>
 <div class="table-responsive">
     <table class="table" id="patients-table">
         <thead>
@@ -17,25 +18,27 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($patients as $patient)
+        @foreach($patients as $patients)
           <tr>
-            <td>{{ $patient->px_regNumber }}</td>
-            <td>{{ $patient->px_regDate }}</td>
-            <!--<td>{{ $patient->px_image }}</td>-->
-            <td>{{ $patient->px_name }}</td>
-          <!--  <td>{{ $patient->px_address }}</td>-->
-          <!--  <td>{{ $patient->px_dob }}</td>-->
-          <!--  <td>{{ $patient->px_gender }}</td>-->
-          <!--  <td>{{ $patient->px_contact }}</td>-->
-          <!--  <td>{{ $patient->px_email }}</td>-->
-            <td>{{ $patient->px_doctor }}</td>
-            <td>{{ $patient->px_status }}</td>
+            <td>{{ $patients->px_regNumber }}</td>
+            <td>{{ $patients->px_regDate }}</td>
+            <!--<td>{{ $patients->px_image }}</td>-->
+            <td>{{ $patients->px_name }}</td>
+          <!--  <td>{{ $patients->px_address }}</td>-->
+          <!--  <td>{{ $patients->px_dob }}</td>-->
+          <!--  <td>{{ $patients->px_gender }}</td>-->
+          <!--  <td>{{ $patients->px_contact }}</td>-->
+          <!--  <td>{{ $patients->px_email }}</td>-->
+            <td>{{ $patients->px_doctor }}</td>
+            <td>{{ $patients->px_status }}</td>
                 <td>
-                    {!! Form::open(['route' => ['patients.destroy', $patient->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['patients.destroy', $patients->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('patients.show', [$patient->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="{{ route('patients.edit', [$patient->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="{{ route('patients.show', [$patients->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{{ route('patients.edit', [$patients->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        @canany(['isAdmin'])
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        @endcan
                     </div>
                     {!! Form::close() !!}
                 </td>
@@ -43,4 +46,3 @@
         @endforeach
         </tbody>
     </table>
-</div>

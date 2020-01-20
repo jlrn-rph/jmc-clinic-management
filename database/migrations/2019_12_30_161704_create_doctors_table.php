@@ -30,7 +30,7 @@ class CreateDoctorsTable extends Migration
           $table->time('dr_timeIn');
           $table->time('dr_timeOut');
           $table->string('dr_daysAvail');
-          $table->integer('dr_status')->default(1);
+          $table->string('dr_status')->default('active');
           $table->softDeletes();
           $table->timestamps();
         });

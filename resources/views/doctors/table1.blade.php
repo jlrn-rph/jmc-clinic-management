@@ -1,3 +1,4 @@
+</div>
 <div class="table-responsive">
     <table class="table" id="doctors-table">
         <thead>
@@ -53,4 +54,3 @@
         @endforeach
         </tbody>
     </table>
-</div>

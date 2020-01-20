@@ -14,6 +14,8 @@ use App\labTest;
 use DB;
 use PDF;
 use App\Laboratory;
+use App\Doctor;
+use Gate;
 
 class LaboratoryController extends AppBaseController
 {
@@ -34,10 +36,14 @@ class LaboratoryController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $laboratories = $this->laboratoryRepository->paginate(15);
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $laboratories = $this->laboratoryRepository->all();
+        $doctors = Doctor::all();
         $patients = Patient::all();
         $labtests = LabTest::all();
-        return view('laboratories.index', compact('patients', 'labtests'))
+        return view('laboratories.index', compact('patients', 'labtests','doctors'))
             ->with('laboratories', $laboratories);
     }
 
@@ -48,9 +54,13 @@ class LaboratoryController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $doctors = Doctor::all();
         $patients = Patient::all();
         $labtests = LabTest::all();
-        return view('laboratories.create', compact('patients', 'labtests'));
+        return view('laboratories.create', compact('patients', 'labtests','doctors'));
     }
 
     /**
@@ -81,7 +91,11 @@ class LaboratoryController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $laboratory = $this->laboratoryRepository->find($id);
+        $doctors = Doctor::all();
         $patients = Patient::all();
         $labtests = LabTest::all();
         if (empty($laboratory)) {
@@ -90,7 +104,7 @@ class LaboratoryController extends AppBaseController
             return redirect(route('laboratories.index'));
         }
 
-        return view('laboratories.show', compact('patients', 'labtests'))->with('laboratory', $laboratory);
+        return view('laboratories.show', compact('patients', 'labtests', 'doctors'))->with('laboratory', $laboratory);
     }
 
     /**
@@ -102,7 +116,11 @@ class LaboratoryController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isDoctor')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $laboratory = $this->laboratoryRepository->find($id);
+        $doctors = Doctor::all();
         $patients = Patient::all();
         $labtests = LabTest::all();
         if (empty($laboratory)) {
@@ -111,7 +129,7 @@ class LaboratoryController extends AppBaseController
             return redirect(route('laboratories.index'));
         }
 
-        return view('laboratories.edit', compact('patients','labtests'))->with('laboratory', $laboratory);
+        return view('laboratories.edit', compact('patients','labtests','doctors'))->with('laboratory', $laboratory);
     }
 
     /**
@@ -178,6 +196,9 @@ class LaboratoryController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $laboratory = $this->laboratoryRepository->find($id);
 
         if (empty($laboratory)) {

@@ -26,7 +26,7 @@ class CreateStaffTable extends Migration
             $table->string('stf_Address');
             $table->string('stf_contact');
             $table->string('stf_email')->unique();
-            $table->string('stf_status')->default(1);
+            $table->string('stf_status')->default('active');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -24,8 +24,6 @@
                     {!! Form::close() !!}
             </div>
         </div>
-        <div class="pagination navigation">
-          {{ $laboratories->links() }}
-        </div>
+
     </div>
 @endsection

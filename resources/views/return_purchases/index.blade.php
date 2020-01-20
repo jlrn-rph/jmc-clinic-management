@@ -23,8 +23,5 @@
                     {!! Form::close() !!}
             </div>
         </div>
-        <div class="pagination navigation">
-          {{ $returnPurchases->links() }}
-        </div>
     </div>
 @endsection

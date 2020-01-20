@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Specialists</h1>
+        <h1 class="pull-left">Specialization</h1>
         <h1 class="pull-right">
             <a data-toggle="modal" data-target="#add-new-specialist" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px"><i class="fa fa-plus-circle"></i> Add Specialization</a>
         </h1>

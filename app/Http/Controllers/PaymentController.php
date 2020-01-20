@@ -13,6 +13,7 @@ use App\Patient;
 use DB;
 use PDF;
 use App\Payment;
+use Gate;
 
 class PaymentController extends AppBaseController
 {
@@ -33,7 +34,10 @@ class PaymentController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $payments = $this->paymentRepository->paginate(15);
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
+        $payments = $this->paymentRepository->all();
         $patients = Patient::all();
 
         return view('payments.index', compact('patients'))
@@ -47,6 +51,9 @@ class PaymentController extends AppBaseController
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $patients = Patient::all();
         return view('payments.create', compact('patients'));
     }
@@ -78,6 +85,9 @@ class PaymentController extends AppBaseController
      */
     public function show($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $payment = $this->paymentRepository->find($id);
         $patients = Patient::all();
         if (empty($payment)) {
@@ -98,6 +108,9 @@ class PaymentController extends AppBaseController
      */
     public function edit($id)
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isStaff')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $payment = $this->paymentRepository->find($id);
         $patients = Patient::all();
         if (empty($payment)) {
@@ -134,19 +147,33 @@ class PaymentController extends AppBaseController
         return redirect(route('payments.index'));
     }
 
-    // public function pdf($id){
-    //
-    //   $payments = Payment::where([['id', $id]])->get();
-    //   $pdf = PDF::loadView('payments.pdf', compact('payments',$payments));
-    //   return $pdf->download('payments.pdf');
-    // }
-    //
-    // public function pdf_list(){
-    //   $patients = Patient::all();
-    //   $payments = Payment::all();
-    //   $pdf = PDF::loadView('payments.pdf1', compact('payments', 'patients'));
-    //   return $pdf->download('payment_list.pdf');
-    // }
+    public function search(Request $request)
+    {
+      $request->validate([
+        'query'=>'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      $payments = DB::table('payments')->where('patients_id','like',"%$query%")
+                        ->paginate(15);
+
+      return view('payments.search-results')->with('payments', $payments);
+    }
+
+    public function pdf($id){
+
+      $payments = Payment::find($id);
+      $pdf = PDF::loadView('payments.pdf', compact('payments',$payments));
+      return $pdf->download('payments.pdf');
+    }
+
+    public function pdf_list(){
+      $patients = Patient::all();
+      $payments = Payment::all();
+      $pdf = PDF::loadView('payments.pdf1', compact('payments', 'patients'));
+      return $pdf->download('payment_list.pdf');
+    }
 
     /**
      * Remove the specified Payment from storage.
@@ -159,6 +186,9 @@ class PaymentController extends AppBaseController
      */
     public function destroy($id)
     {
+        if(!Gate::allows('isAdmin')){
+          abort(404, "Sorry, you're not authorize to do this");
+        }
         $payment = $this->paymentRepository->find($id);
 
         if (empty($payment)) {

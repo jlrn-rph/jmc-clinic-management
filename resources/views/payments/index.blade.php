@@ -5,7 +5,10 @@
         <h1 class="pull-left">Payments</h1>
         <h1 class="pull-right">
            <a data-toggle="modal" data-target="#add-new-payment" class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px"><i class="fa fa-plus-circle"></i> New Payment</a>
-          
+           @can('isAdmin')
+           <a href="{{ route('pay_pdf') }}" class="btn btn-danger pull-right" style="margin-top: -10px;margin-bottom: 5px"></i>Convert to PDF</a>
+           @endcan
+
         </h1>
     </section>
     <div class="content">
@@ -24,8 +27,6 @@
                     {!! Form::close() !!}
             </div>
         </div>
-        <div class="pagination navigation">
-          {{ $payments->links() }}
-        </div>
+
     </div>
 @endsection

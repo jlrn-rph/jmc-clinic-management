@@ -15,7 +15,7 @@
                    <!-- Update Role Name Field -->
                    <div class="form-group col-md-6">
                       {!! Form::label('role_name', 'Role Name:') !!}
-                      {!! Form::text('role_name', null, ['class' => 'form-control']) !!}
+                      {!! Form::text('role_name', null, ['class' => 'form-control', 'required', 'onkeypress'=>"return /[a-z ]/i.test(event.key)"]) !!}
                    </div>
                </div>
                   <div>
