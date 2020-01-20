@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>Specializationd</h1>
+        <h1>Specialization</h1>
     </section>
     <div class="content">
         <div class="box box-primary">
