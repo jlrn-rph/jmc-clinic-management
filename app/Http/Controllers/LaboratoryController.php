@@ -10,12 +10,12 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Patient;
-use App\labTest;
 use DB;
 use PDF;
 use App\Laboratory;
 use App\Doctor;
 use Gate;
+use App\LabTest;
 
 class LaboratoryController extends AppBaseController
 {
