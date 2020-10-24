@@ -17,3 +17,6 @@ Check the project [here](http://jmc-clinic-management.herokuapp.com/)
 
 ## Framework used
 * Laravel
+
+## Screenshots
+![jmc](https://user-images.githubusercontent.com/38187304/97081132-f0db1e80-1632-11eb-8454-da10c5ac8b66.gif)
